@@ -1,7 +1,26 @@
 {
   "name": "launchpad",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "private": true,
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gleguizamon/launchpad"
+  },
+  "bugs": {
+    "url": "https://github.com/gleguizamon/launchpad/issues"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public",
+    "flow.coverage": "flow coverage",
+    "flow.install": "flow-typed install --ignoreDeps dev",
+    "flow.start": "flow start",
+    "flow.status": "flow status",
+    "flow.stop": "flow stop"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -9,19 +28,37 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "styled-jsx": "^4.0.1",
+    "tachyons": "^4.12.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-flow": "^7.16.0",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/node-logger": "^6.4.9",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.4.9",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^26.0.1",
+    "babel-loader": "8.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-react-app": "^5.0.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "eslint-plugin-standard": "^4.0.1",
+    "flow-bin": "^0.167.0",
+    "prettier": "^2.4.1"
   },
   "browserslist": {
     "production": [
