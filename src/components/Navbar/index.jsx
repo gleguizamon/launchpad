@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/logo.png';
 import './styles.css';
 
-export const Navbar = () => (
+const Navbar = () => (
   <div className="h3 b--black ba">
     <ul className="flex items-center justify-around h-100 list pa0 mv0">
       <li>
@@ -23,3 +23,5 @@ export const Navbar = () => (
     </ul>
   </div>
 );
+
+export default Navbar;
