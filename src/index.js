@@ -1,11 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/globals.css';
-import { Navbar } from './components/Navbar/Navbar.component';
+import { ChakraProvider } from '@chakra-ui/react';
+import Navbar from './components/Navbar';
+import ItemListContainer from './components/ItemListContainer';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Navbar />
-  </React.StrictMode>,
+  <ChakraProvider>
+    <React.StrictMode>
+      <Navbar />
+      <ItemListContainer />
+    </React.StrictMode>
+  </ChakraProvider>,
   document.getElementById('root')
 );
