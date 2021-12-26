@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Collapse, Button } from '@chakra-ui/react';
+import { Button, Collapse } from '@chakra-ui/react';
 
 const ItemDetailContainer = ({ item }) => {
   const [show, setShow] = useState(false);
-
   const handleToggle = () => setShow(!show);
-
   return (
     <>
       <Collapse startingHeight={20} in={show}>

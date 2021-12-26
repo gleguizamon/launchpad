@@ -1,5 +1,5 @@
 import React from 'react';
-// import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.png';
 import { BiMenu, BiCart } from 'react-icons/bi';
 
 const navItems = [
@@ -10,9 +10,11 @@ const navItems = [
 
 const Navbar = () => (
   <nav className="h3 flex w-100 ph3 mv3">
-    <div className="w-30">
+    <div className="w-15">
       <BiMenu className="f3 items-center h-100 launchpad" />
-      {/* <img src={logo} alt="logo" className="cover" /> */}
+    </div>
+    <div className="w-15">
+      <img className="cover" src={logo} alt="logo" />
     </div>
 
     <div className="w-40 flex items-center">
