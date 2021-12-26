@@ -6,6 +6,7 @@ const ItemList = ({ items }) => {
     <>
       {items.map(item => (
         <Item key={item.id} item={item} />
+        // usar id para saber la request codificada
       ))}
     </>
   );
