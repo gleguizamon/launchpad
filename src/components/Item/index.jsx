@@ -3,7 +3,14 @@ import { Box, Badge, Image } from '@chakra-ui/react';
 import ItemDetailContainer from '../ItemDetailContainer';
 
 export const Item = ({ item }) => (
-  <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" color="white">
+  <Box
+    className="mv4"
+    maxW="sm"
+    borderWidth="1px"
+    borderRadius="lg"
+    overflow="hidden"
+    color="white"
+  >
     <Image src={item.imageUrl} alt={item.imageAlt} />
 
     <Box p="6" backgroundColor="gray.600">
