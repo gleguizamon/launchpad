@@ -1,15 +1,12 @@
 import React from 'react';
 import Item from '../Item';
 
-const ItemList = ({ items }) => {
-  return (
-    <>
-      {items.map(item => (
-        <Item key={item.id} item={item} />
-        // usar id para saber la request codificada
-      ))}
-    </>
-  );
-};
+const ItemList = ({ items }) => (
+  <>
+    {items.map(item => (
+      <Item item={item} />
+    ))}
+  </>
+);
 
 export default ItemList;

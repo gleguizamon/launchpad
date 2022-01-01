@@ -1,80 +1,32 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import ItemList from '../ItemList';
+import { useParams } from 'react-router-dom';
 
-const mock = [
-  {
-    isNew: true,
-    categories: 'viajes',
-    title: 'Nueva York',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae eligendi ad ullam corrupti, similique qui praesentium, reiciendis quas expedita animi distinctio veritatis modi laboriosam tempore quibusdam nisi esse impedit.',
-    imageUrl: 'https://picsum.photos/400/200',
-    country: 'Estados Unidos',
-    price: 4805.6
-  },
-  {
-    isNew: true,
-    categories: 'viajes',
-    title: 'Buenos Aires',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae eligendi ad ullam corrupti, similique qui praesentium, reiciendis quas expedita animi distinctio veritatis modi laboriosam tempore quibusdam nisi esse impedit.',
-    imageUrl: 'https://picsum.photos/400/200',
-    country: 'Argentina',
-    price: 2003.3
-  },
-  {
-    isNew: false,
-    categories: 'viajes',
-    title: 'Bogota',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae eligendi ad ullam corrupti, similique qui praesentium, reiciendis quas expedita animi distinctio veritatis modi laboriosam tempore quibusdam nisi esse impedit.',
-    imageUrl: 'https://picsum.photos/400/200',
-    country: 'Colombia',
-    price: 1270.8
-  },
-  {
-    isNew: true,
-    categories: 'experiences',
-    title: 'Paracaidismo en el Caribe',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae eligendi ad ullam corrupti, similique qui praesentium, reiciendis quas expedita animi distinctio veritatis modi laboriosam tempore quibusdam nisi esse impedit.',
-    imageUrl: 'https://picsum.photos/400/200',
-    country: 'Cuba',
-    price: 4805.6
-  },
-  {
-    isNew: true,
-    categories: 'experiences',
-    title: 'Trekking en el Himalaya',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae eligendi ad ullam corrupti, similique qui praesentium, reiciendis quas expedita animi distinctio veritatis modi laboriosam tempore quibusdam nisi esse impedit.',
-    imageUrl: 'https://picsum.photos/400/200',
-    country: 'Nepal',
-    price: 2003.3
-  },
-  {
-    isNew: false,
-    categories: 'experiences',
-    title: 'Cabalgatas en los Andes',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae eligendi ad ullam corrupti, similique qui praesentium, reiciendis quas expedita animi distinctio veritatis modi laboriosam tempore quibusdam nisi esse impedit.',
-    imageUrl: 'https://picsum.photos/400/200',
-    country: 'Argentina',
-    price: 1270.8
-  }
-];
-
-export const ItemListContainer = () => {
+const ItemListContainer = () => {
+  const data = require('./mock.json');
+  const { categoryId } = useParams();
   const [items, setItems] = useState([]);
   useEffect(() => {
     const itemPromise = new Promise((resolve, reject) => {
-      resolve(mock);
+      resolve(data);
     });
-    itemPromise.then(resolve => setItems(resolve));
-  }, []);
+    setTimeout(() => {
+      itemPromise.then(resolve => {
+        const filteredItems = resolve.filter(items => {
+          if (categoryId) {
+            return items.category === categoryId;
+          }
+          return items;
+        });
+        setItems(filteredItems);
+      });
+    }, 2000);
+  }, [categoryId]);
+
   return (
     <div className="mv6 flex flex-wrap justify-around center">
-      <ItemList className="w-20" items={items} />
+      <ItemList items={items} />
     </div>
   );
 };

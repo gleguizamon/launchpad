@@ -8,7 +8,7 @@ body {
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #222e3f;
+  background-color: #151d27;
 }
 
 a {
@@ -21,12 +21,20 @@ a {
 }
 
 #root {
-  background-color: #222e3f;
+  background-color: #151d27;
 }
 
 .launchpad {
-  color: #ff9700;
+  color: #151d27;
 }
 .bg-launchpad {
+  background-color: #151d27;
+}
+
+.primary {
+  color: #ff9700;
+}
+
+.bg-primary {
   background-color: #ff9700;
 }

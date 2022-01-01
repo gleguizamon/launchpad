@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "stock": 10,
+    "isNew": true,
+    "category": "aventura",
+    "title": "Nueva York",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Nueva York",
+    "country": "Estados Unidos",
+    "price": 4805.6
+  },
+  {
+    "id": 2,
+    "stock": 8,
+    "isNew": true,
+    "category": "aventura",
+    "title": "Buenos Aires",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Buenos Aires",
+    "country": "Argentina",
+    "price": 2003.3
+  },
+  {
+    "id": 3,
+    "stock": 5,
+    "isNew": false,
+    "category": "aventura",
+    "title": "Bogota",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Bogota",
+    "country": "Colombia",
+    "price": 1270.8
+  },
+
+  {
+    "id": 4,
+    "stock": 5,
+    "isNew": true,
+    "category": "entretenimiento",
+    "title": "Nueva York",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Nueva York",
+    "country": "Estados Unidos",
+    "price": 4805.6
+  },
+  {
+    "id": 5,
+    "stock": 2,
+    "isNew": true,
+    "category": "entretenimiento",
+    "title": "Buenos Aires",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Buenos Aires",
+    "country": "Argentina",
+    "price": 2003.3
+  },
+  {
+    "id": 6,
+    "stock": 15,
+    "isNew": false,
+    "category": "entretenimiento",
+    "title": "Bogota",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Bogota",
+    "country": "Colombia",
+    "price": 1270.8
+  },
+
+  {
+    "id": 7,
+    "stock": 7,
+    "isNew": true,
+    "category": "experiencias",
+    "title": "Paracaidismo en el Caribe",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Paracaidismo en el Caribe",
+    "country": "Cuba",
+    "price": 4805.6
+  },
+  {
+    "id": 8,
+    "stock": 8,
+    "isNew": true,
+    "category": "experiencias",
+    "title": "Trekking en el Himalaya",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Trekking en el Himalaya",
+    "country": "Nepal",
+    "price": 2003.3
+  },
+  {
+    "id": 9,
+    "stock": 2,
+    "isNew": false,
+    "category": "experiencias",
+    "title": "Cabalgatas en los Andes",
+    "description": "Lorem ipsum dolor sit amet",
+    "imageUrl": "https://picsum.photos/400/200",
+    "imageAlt": "Cabalgatas en los Andes",
+    "country": "Argentina",
+    "price": 1270.8
+  }
+]
