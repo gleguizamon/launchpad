@@ -1,48 +1,105 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../../assets/logo.png';
-import { BiMenu, BiCart } from 'react-icons/bi';
+import { Link, NavLink } from 'react-router-dom';
+import { BiCart, BiSearchAlt, BiChevronDown } from 'react-icons/bi';
+import {
+  Button,
+  Flex,
+  Box,
+  InputGroup,
+  Input,
+  InputRightElement,
+  Spacer,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem
+} from '@chakra-ui/react';
 
-const navItems = [
-  { name: 'Experiencias', path: '/experiences' },
-  { name: 'Contacto', path: '/contact' },
-  { name: 'Acerca', path: '/about' }
-];
+export default function Navbar() {
+  const [search, setSearch] = useState('');
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.warn(search);
+  };
 
-const Navbar = () => (
-  <nav className="h3 flex w-100 ph3 mv3">
-    <div className="w-15">
-      <BiMenu className="f3 items-center h-100 launchpad" />
-    </div>
-    <div className="w-15">
-      <img className="cover" src={logo} alt="logo" />
-    </div>
-
-    <div className="w-40 flex items-center">
-      <div className="center br4 w-100 h2 bg-white">
-        <div className="center br4 h2 bg-launchpad fr w-search" />
-      </div>
-    </div>
-
-    <div className="w-30 flex items-center justify-between ph2">
-      <ul className="w-90 flex justify-around">
-        {navItems.map(item => (
-          <li key={item.name} className="flex items-center">
-            <a href={item.path} className="link pointer launchpad">
-              {item.name}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <a href="/cart">
-        <BiCart className="f3 launchpad pointer" />
-      </a>
-    </div>
-    <style jsx>{`
-      .w-search {
-        width: 15%;
-      }
-    `}</style>
-  </nav>
-);
-
-export default Navbar;
+  return (
+    <>
+      <nav className="w-100 ph3 mv3 bg-black white">
+        <Flex>
+          <Box p="2">
+            <Link to="/">
+              <Flex className="items-center">
+                <Box overflow="auto" float="left" w="175px" h="auto">
+                  <img src={logo} alt="logo" />
+                </Box>
+              </Flex>
+            </Link>
+          </Box>
+          <Spacer />
+          <Box className="w-30 flex items-center">
+            <InputGroup>
+              <Input
+                type="text"
+                placeholder="Search..."
+                value={search}
+                focusBorderColor="white"
+                onChange={e => setSearch(e.target.value)}
+                onSubmit={handleSubmit}
+              />
+              <InputRightElement width="4.5rem" className="bl b--white">
+                <Button
+                  h="1.75rem"
+                  size="sm"
+                  backgroundColor="transparent"
+                  onClick={e => {
+                    alert('clicked', e.target.value);
+                  }}
+                >
+                  <BiSearchAlt className="f3" />
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+          </Box>
+          <Spacer />
+          <Box className="flex items-center">
+            <Box mr="4">
+              <Menu>
+                <MenuButton
+                  variant="solid"
+                  bg="teal"
+                  color="white"
+                  as={Button}
+                  rightIcon={<BiChevronDown className="f3 pa0 ma0" />}
+                >
+                  Categorías
+                </MenuButton>
+                <MenuList color="black" bg="white">
+                  <MenuItem>
+                    <NavLink to="/">Todas</NavLink>
+                  </MenuItem>
+                  <MenuItem>
+                    <NavLink to="/category/aventura">Aventura</NavLink>
+                  </MenuItem>
+                  <MenuItem>
+                    <NavLink to="/category/entretenimiento">Entretenimiento</NavLink>
+                  </MenuItem>
+                  <MenuItem>
+                    <NavLink to="/category/experiencias">Experiencias</NavLink>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
+            <Button colorScheme="teal">
+              <BiCart className="f3" />
+            </Button>
+          </Box>
+        </Flex>
+      </nav>
+      {/* <ButtonGroup className="primary" size="sm" isAttached variant="outline">
+        <Button mr="-px">Save</Button>
+        <IconButton aria-label="Cart" icon={<BiCart className="f3 primary pointer" />} />
+      </ButtonGroup> */}
+    </>
+  );
+}

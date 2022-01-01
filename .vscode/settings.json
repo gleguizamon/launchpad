@@ -1,0 +1,15 @@
+{
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/build": true,
+    "**/flow-typed": true,
+    "**/scripts": true
+  },
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "typescript.disableAutomaticTypeAcquisition": true
+}

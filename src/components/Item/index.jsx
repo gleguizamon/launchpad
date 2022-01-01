@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Badge, Image } from '@chakra-ui/react';
-import ItemDetailContainer from '../ItemDetailContainer';
+import { Box, Badge, Image, Button } from '@chakra-ui/react';
 
 export const Item = ({ item }) => (
   <Box
@@ -40,7 +39,11 @@ export const Item = ({ item }) => (
         <Box as="span" fontSize="sm">
           / ars
         </Box>
-        <ItemDetailContainer item={item} />
+        <>
+          <Button size="sm" mt="1rem" backgroundColor="#ff9700">
+            Mostrar detalles
+          </Button>
+        </>
       </Box>
     </Box>
   </Box>
