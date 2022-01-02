@@ -1,7 +1,7 @@
 <p align="center">
   <a href="...">
     <img alt="Launchpad" height="125" src="https://github.com/gleguizamon/launchpad/blob/develop/src/assets/logo-black.png?raw=true">
-  </a>
+  </a><br>
 <strong>Launchpad</strong> es un <strong>e-commerce</strong> inspirado en <a href="https://bigbox.com.ar">BigBox</a> construido sobre <a href="https://reactjs.org/">ReactJs</a>.
 </p>
 
@@ -14,7 +14,7 @@ yarn start
 
 ## ⚙️ Instalación
 
-Asegúrese de tener instalado Yarn ([descargar]((https://yarnpkg.com/)).
+Asegúrese de tener instalado Yarn ([descargar](https://yarnpkg.com/)).
 
 ## Available Scripts
 
