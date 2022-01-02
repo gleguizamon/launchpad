@@ -5,7 +5,8 @@
     "**/node_modules": true,
     "**/build": true,
     "**/flow-typed": true,
-    "**/scripts": true
+    "**/scripts": true,
+    "**/yarn.lock": true,
   },
   "editor.formatOnSave": true,
   "javascript.format.enable": false,

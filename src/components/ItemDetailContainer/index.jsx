@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
-import { Button, Collapse } from '@chakra-ui/react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchId } from '../../mocks/async-mock';
+import ItemDetail from '../ItemDetail';
 
-const ItemDetailContainer = ({ item }) => {
-  const [show, setShow] = useState(false);
-  const handleToggle = () => setShow(!show);
-  return (
-    <>
-      <Collapse startingHeight={20} in={show}>
-        {item.description}
-      </Collapse>
-      <Button size="sm" onClick={handleToggle} mt="1rem" backgroundColor="#ff9700">
-        Mostrar {show ? 'menos' : 'más'}
-      </Button>
-    </>
-  );
+const ItemDetailContainer = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState();
+  useEffect(() => {
+    getItems(id);
+  }, [id]);
+
+  const getItems = id => {
+    fetchId(id).then(result => {
+      setProduct(result);
+    });
+  };
+
+  return product ? <ItemDetail item={product} /> : null;
 };
 
 export default ItemDetailContainer;

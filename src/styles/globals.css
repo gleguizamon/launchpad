@@ -8,7 +8,7 @@ body {
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #151d27;
+  background-color: #f5f4f2;
 }
 
 a {
@@ -21,20 +21,18 @@ a {
 }
 
 #root {
-  background-color: #151d27;
+  background-color: #f5f4f2;
 }
 
 .launchpad {
-  color: #151d27;
-}
-.bg-launchpad {
-  background-color: #151d27;
-}
-
-.primary {
   color: #ff9700;
 }
-
-.bg-primary {
+.bg-launchpad {
   background-color: #ff9700;
+}
+.primary {
+  color: #3e434f;
+}
+.bg-primary {
+  background-color: #f5f4f2;;
 }
