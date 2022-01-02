@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo-black.png';
 import { Link, NavLink } from 'react-router-dom';
 import { BiCart, BiSearchAlt, BiChevronDown } from 'react-icons/bi';
 import {
@@ -25,8 +25,8 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-100 ph3 mv3 bg-black white">
-        <Flex>
+      <nav className="flex items-center ph3 h-nav bg-white primary">
+        <Flex className="w-100">
           <Box p="2">
             <Link to="/">
               <Flex className="items-center">
@@ -43,11 +43,13 @@ export default function Navbar() {
                 type="text"
                 placeholder="Search..."
                 value={search}
-                focusBorderColor="white"
+                focusBorderColor="black"
+                isInvalid
+                errorBorderColor="black"
                 onChange={e => setSearch(e.target.value)}
                 onSubmit={handleSubmit}
               />
-              <InputRightElement width="4.5rem" className="bl b--white">
+              <InputRightElement width="4.5rem" className="bl b--black">
                 <Button
                   h="1.75rem"
                   size="sm"
@@ -67,10 +69,10 @@ export default function Navbar() {
               <Menu>
                 <MenuButton
                   variant="solid"
-                  bg="teal"
-                  color="white"
+                  bg="white"
+                  className="primary shadow-4"
                   as={Button}
-                  rightIcon={<BiChevronDown className="f3 pa0 ma0" />}
+                  rightIcon={<BiChevronDown className="f3 pa0 ma0 primary" />}
                 >
                   Categorías
                 </MenuButton>
@@ -82,19 +84,24 @@ export default function Navbar() {
                     <NavLink to="/category/aventura">Aventura</NavLink>
                   </MenuItem>
                   <MenuItem>
-                    <NavLink to="/category/entretenimiento">Entretenimiento</NavLink>
+                    <NavLink to="/category/gastronomia">Gastronomia</NavLink>
                   </MenuItem>
                   <MenuItem>
-                    <NavLink to="/category/experiencias">Experiencias</NavLink>
+                    <NavLink to="/category/estadias">Estadias</NavLink>
                   </MenuItem>
                 </MenuList>
               </Menu>
             </Box>
-            <Button colorScheme="teal">
-              <BiCart className="f3" />
+            <Button colorScheme="white" className="shadow-4">
+              <BiCart className="f3 primary" />
             </Button>
           </Box>
         </Flex>
+        <style jsx>{`
+          .h-nav {
+            height: 5rem;
+          }
+        `}</style>
       </nav>
       {/* <ButtonGroup className="primary" size="sm" isAttached variant="outline">
         <Button mr="-px">Save</Button>

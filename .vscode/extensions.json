@@ -5,6 +5,5 @@
       "editorconfig.editorconfig",
       "dbaeumer.vscode-eslint",
       "esbenp.prettier-vscode",
-      "GraphQL.vscode-graphql"
     ]
   }

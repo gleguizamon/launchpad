@@ -1,52 +1,62 @@
 import React from 'react';
-import { Box, Badge, Image, Button } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
+import { Box, Badge, Button, Image } from '@chakra-ui/react';
 
-export const Item = ({ item }) => (
-  <Box
-    className="mv4"
-    maxW="sm"
-    borderWidth="1px"
-    borderRadius="lg"
-    overflow="hidden"
-    color="white"
-  >
-    <Image src={item.imageUrl} alt={item.imageAlt} />
+const Item = ({ item }) => {
+  // const [count, setCount] = useState(0);
 
-    <Box p="6" backgroundColor="gray.600">
-      <Box display="flex" alignItems="baseline">
-        {item.isNew && (
-          <Badge borderRadius="full" px="2" colorScheme="teal">
-            New
-          </Badge>
-        )}
-        <Box
-          fontWeight="semibold"
-          letterSpacing="wide"
-          fontSize="xs"
-          textTransform="uppercase"
-          ml="2"
-        >
-          {item.beds} beds &bull; {item.baths} baths
+  // const handleAdd = () => {
+  //   setTimeout(() => {
+  //     setCount(count + 1);
+  //   }, 1000);
+  // };
+  // <Skeleton isLoaded={load}>
+  return (
+    <>
+      <Box className="mv4 h-card w-100" maxW="sm" borderRadius="xl" overflow="hidden" color="white">
+        {item.stock === 0 ? (
+          <Box className="absolute ml2 mt1">
+            <Badge borderRadius="full" px="2" colorScheme="red">
+              Sin stock
+            </Badge>
+          </Box>
+        ) : null}
+        <Image className="fit w-100 h-100" src={item.imageUrl} alt={item.imageAlt} />
+        <Box className="relative top-custom flex items-center justify-between ph2 bg-transparent img-shadow br3">
+          <Box fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
+            {item.title}
+          </Box>
+          <Box className="f4" as="span">
+            ${item.price}
+          </Box>
+          <Box className="">
+            <Button className="flex" size="sm" backgroundColor="#ff9700">
+              {item.stock ? (
+                <NavLink to={`/item/${item.id}`}>Ver más</NavLink>
+              ) : (
+                <span>Sin Stock</span>
+              )}
+            </Button>
+          </Box>
         </Box>
       </Box>
-
-      <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-        {item.title}
-      </Box>
-
-      <Box>
-        {item.price}
-        <Box as="span" fontSize="sm">
-          / ars
-        </Box>
-        <>
-          <Button size="sm" mt="1rem" backgroundColor="#ff9700">
-            Mostrar detalles
-          </Button>
-        </>
-      </Box>
-    </Box>
-  </Box>
-);
+      <style jsx>{`
+        .h-card {
+          height: 13rem;
+        }
+        .fit {
+          object-fit: cover;
+        }
+        .top-custom {
+          top: -3rem;
+          height: 3rem;
+        }
+        .img-shadow {
+          box-shadow: inset 0px -94px 37px -37px rgba(0, 0, 0, 0.7);
+        }
+      `}</style>
+    </>
+  );
+};
 
 export default Item;
