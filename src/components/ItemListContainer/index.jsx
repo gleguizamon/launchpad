@@ -2,28 +2,38 @@
 import React, { useState, useEffect } from 'react';
 import ItemList from '../ItemList';
 import { useParams } from 'react-router-dom';
-import { fetchCategories } from '../../mocks/async-mock';
+import { products } from '../../mocks/async-mock';
 
-const ItemListContainer = () => {
-  const { categoryId } = useParams();
+const ItemListContainer = ({ greeting }) => {
   const [items, setItems] = useState([]);
-  const [load, setLoad] = useState(Boolean);
+  const [loading, setLoading] = useState(true);
+  const { categoryId } = useParams();
+
   useEffect(() => {
-    setLoad(false);
-    fetchCategories(categoryId).then(result => {
-      setItems(result);
-      setLoad(true);
-      if (categoryId) {
-        return items.category === categoryId;
-      }
-      return items;
+    setLoading(true);
+    const getItems = new Promise(resolve => {
+      setTimeout(() => {
+        const myData = categoryId
+          ? products.filter(item => item.category === categoryId)
+          : products;
+        resolve(myData);
+      }, 2000);
     });
+
+    getItems
+      .then(res => {
+        setItems(res);
+      })
+      .finally(() => setLoading(false));
   }, [categoryId]);
 
-  return (
+  return loading ? (
+    <h2>CARGANDO...</h2>
+  ) : (
     <>
+      <h3 className="tc">{greeting}</h3>
       <div className="mv6 flex flex-wrap justify-around center">
-        <ItemList items={items} load={load} />
+        <ItemList items={items} />
       </div>
     </>
   );

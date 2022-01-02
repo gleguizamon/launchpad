@@ -1,23 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchId } from '../../mocks/async-mock';
+import { products } from '../../mocks/async-mock';
 import ItemDetail from '../ItemDetail';
 
 const ItemDetailContainer = () => {
-  const { id } = useParams();
   const [product, setProduct] = useState();
+  const [loading, setLoading] = useState(true);
+  const { itemId } = useParams();
+
   useEffect(() => {
-    getItems(id);
-  }, [id]);
-
-  const getItems = id => {
-    fetchId(id).then(result => {
-      setProduct(result);
+    setLoading(true);
+    const getItems = new Promise(resolve => {
+      setTimeout(() => {
+        const myData = products.find(item => item.id === itemId);
+        resolve(myData);
+      }, 2000);
     });
-  };
 
-  return product ? <ItemDetail item={product} /> : null;
+    getItems
+      .then(res => {
+        setProduct(res);
+      })
+      .finally(() => setLoading(false));
+  }, [itemId]);
+
+  return loading ? <h2>CARGANDO...</h2> : <ItemDetail {...product} />;
 };
 
 export default ItemDetailContainer;

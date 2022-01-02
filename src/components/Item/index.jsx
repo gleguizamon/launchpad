@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Box, Badge, Button, Image } from '@chakra-ui/react';
 
-const Item = ({ item }) => {
+const Item = ({ id, title, category, imageUrl, imageAlt, description, price, stock }) => {
   // const [count, setCount] = useState(0);
 
   // const handleAdd = () => {
@@ -14,28 +14,24 @@ const Item = ({ item }) => {
   return (
     <>
       <Box className="mv4 h-card w-100" maxW="sm" borderRadius="xl" overflow="hidden" color="white">
-        {item.stock === 0 ? (
+        {stock === 0 ? (
           <Box className="absolute ml2 mt1">
             <Badge borderRadius="full" px="2" colorScheme="red">
               Sin stock
             </Badge>
           </Box>
         ) : null}
-        <Image className="fit w-100 h-100" src={item.imageUrl} alt={item.imageAlt} />
+        <Image className="fit w-100 h-100" src={imageUrl} alt={imageAlt} />
         <Box className="relative top-custom flex items-center justify-between ph2 bg-transparent img-shadow br3">
           <Box fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-            {item.title}
+            {title}
           </Box>
           <Box className="f4" as="span">
-            ${item.price}
+            ${price}
           </Box>
           <Box className="">
             <Button className="flex" size="sm" backgroundColor="#ff9700">
-              {item.stock ? (
-                <NavLink to={`/item/${item.id}`}>Ver más</NavLink>
-              ) : (
-                <span>Sin Stock</span>
-              )}
+              {stock ? <NavLink to={`/product/${id}`}>Ver más</NavLink> : <span>Sin Stock</span>}
             </Button>
           </Box>
         </Box>

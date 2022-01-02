@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
@@ -10,9 +10,10 @@ const App = () => (
   <BrowserRouter>
     <Navbar />
     <Routes>
-      <Route exact path="/" element={<ItemListContainer />} />
-      <Route path="/category/:categoryId" element={<ItemListContainer />} />
-      <Route path="/item/:id" element={<ItemDetailContainer />} />
+      <Route path="/" element={<ItemListContainer greeting={'HOME'} />} />
+      <Route path="/category/:categoryId" element={<ItemListContainer greeting={'Filtrado'} />} />
+      <Route path="/product/:itemId" element={<ItemDetailContainer />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
     <ScrollTop />
   </BrowserRouter>
