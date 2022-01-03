@@ -7,28 +7,24 @@ const ItemDetail = ({ title, imageUrl, imageAlt, description, price, stock }) =>
 
   return (
     <>
-      <Flex className="mt5 h5 ba b--black items-center justify-around">
-        <Box className="w-20">
-          <Image className="fit w-100 h-100" src={imageUrl} alt={imageAlt} />
-        </Box>
-        <Box>
-          <Box>
-            <h2>{title}</h2>
+      <Flex className="w-100 justify-center">
+        <Flex className="flex-column mv5 pv4 h-auto ba b--black bg-dark br4 w-80 items-center justify-around">
+          <Box className="w-50">
+            <Image className="fit w-100 h-100 br4 shadow-5" src={imageUrl} alt={imageAlt} />
           </Box>
-          <Box>
-            <h3>{stock ? `$${price}` : `-`}</h3>
-          </Box>
-          <Box>
-            <p>{description}</p>
-          </Box>
-          {!count ? (
-            <ItemCount stock={stock} onAdd={setCount} />
-          ) : (
-            <>
-              <button>Terminar compra</button>
-            </>
-          )}
-        </Box>
+          <Flex className="w-50 flex-column items-center white">
+            <h1 className="b f3 mt2">{title}</h1>
+            <h2 className="f5 mt2">{description}</h2>
+            <span className="b f5 mv2">{stock ? `$${price}` : `-`}</span>
+            {!count ? (
+              <ItemCount stock={stock} onAdd={setCount} />
+            ) : (
+              <>
+                <button>Terminar compra</button>
+              </>
+            )}
+          </Flex>
+        </Flex>
       </Flex>
       <style jsx>{`
         .fit {

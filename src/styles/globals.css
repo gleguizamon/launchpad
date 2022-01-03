@@ -34,5 +34,8 @@ a {
   color: #3e434f;
 }
 .bg-primary {
-  background-color: #f5f4f2;;
+  background-color: #f5f4f2;
+}
+.bg-dark {
+  background-color: #131415;
 }

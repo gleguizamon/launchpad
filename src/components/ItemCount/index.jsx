@@ -1,23 +1,28 @@
 import React from 'react';
-import {
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper
-} from '@chakra-ui/react';
+import { HStack, Button, Input, useNumberInput } from '@chakra-ui/react';
 
 const ItemCount = ({ stock }) => {
+  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
+    step: 1,
+    defaultValue: 1,
+    min: 1,
+    max: stock
+  });
+  const inc = getIncrementButtonProps();
+  const dec = getDecrementButtonProps();
+  const input = getInputProps({ isReadOnly: true });
   return (
     <>
       {stock ? (
-        <NumberInput size="md" maxW={24} defaultValue={1} min={1} max={stock}>
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
-        </NumberInput>
+        <HStack maxW="150px">
+          <Button {...dec} colorScheme="teal">
+            -
+          </Button>
+          <Input className="tc" {...input} />
+          <Button {...inc} colorScheme="teal">
+            +
+          </Button>
+        </HStack>
       ) : (
         <>
           <p className="red">No hay stock</p>
