@@ -28,11 +28,11 @@ const ItemListContainer = ({ greeting }) => {
   }, [categoryId]);
 
   return loading ? (
-    <h2>CARGANDO...</h2>
+    <span className="db f4 b mt2 ml3 primary">CARGANDO...</span>
   ) : (
     <>
-      <h3 className="tc">{greeting}</h3>
-      <div className="mv6 flex flex-wrap justify-around center">
+      <h3 className="tc f2 b mt2 primary">{greeting}</h3>
+      <div className="mv5-l mv4-m mv3 mw9 center flex flex-wrap justify-around">
         <ItemList items={items} />
       </div>
     </>

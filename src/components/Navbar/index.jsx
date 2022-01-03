@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo-black.png';
+import isologo from '../../assets/logo-black-small.png';
+import DropdownMenu from '../DropdownMenu';
 import { Link, NavLink } from 'react-router-dom';
 import { BiCart, BiSearchAlt, BiChevronDown } from 'react-icons/bi';
 import {
   Button,
-  Flex,
   Box,
   InputGroup,
   Input,
@@ -25,23 +26,22 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex items-center ph3 h-nav bg-white primary">
-        <Flex className="w-100">
-          <Box p="2">
+      <nav className="flex items-center ph3 h-nav bg-white primary overflow-hidden">
+        <Box className="w-100 mw9 center dn flex-l">
+          <Box className="flex items-center w-20">
             <Link to="/">
-              <Flex className="items-center">
-                <Box overflow="auto" float="left" w="175px" h="auto">
-                  <img src={logo} alt="logo" />
-                </Box>
-              </Flex>
+              <Box className="overflow-auto fl h-auto" w="175px">
+                <img src={logo} alt="logo" />
+              </Box>
             </Link>
           </Box>
           <Spacer />
           <Box className="w-30 flex items-center">
             <InputGroup>
               <Input
+                className="pr-search"
                 type="text"
-                placeholder="Search..."
+                placeholder="Buscar..."
                 value={search}
                 focusBorderColor="black"
                 isInvalid
@@ -65,7 +65,7 @@ export default function Navbar() {
           </Box>
           <Spacer />
           <Box className="flex items-center">
-            <Box mr="4">
+            <Box className="mr2">
               <Menu>
                 <MenuButton
                   variant="solid"
@@ -84,10 +84,10 @@ export default function Navbar() {
                     <NavLink to="/category/aventura">Aventura</NavLink>
                   </MenuItem>
                   <MenuItem>
-                    <NavLink to="/category/gastronomia">Gastronomia</NavLink>
+                    <NavLink to="/category/gastronomia">Gastronomía</NavLink>
                   </MenuItem>
                   <MenuItem>
-                    <NavLink to="/category/estadias">Estadias</NavLink>
+                    <NavLink to="/category/estadias">Estadías</NavLink>
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -96,10 +96,26 @@ export default function Navbar() {
               <BiCart className="f3 primary" />
             </Button>
           </Box>
-        </Flex>
+        </Box>
+
+        <Box className="w-100 mw9 center flex justify-between dn-l">
+          <DropdownMenu />
+          <Link to="/">
+            <Box className="flex justify-center overflow-auto h-auto" w="175px">
+              <img className="w-20" src={isologo} alt="logo" />
+            </Box>
+          </Link>
+          <Button colorScheme="white" className="shadow-4">
+            <BiCart className="f3 primary" />
+          </Button>
+        </Box>
+
         <style jsx>{`
           .h-nav {
             height: 5rem;
+          }
+          .pr-search {
+            padding-right: 70px;
           }
         `}</style>
       </nav>

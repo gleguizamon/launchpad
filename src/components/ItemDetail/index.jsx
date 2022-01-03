@@ -16,7 +16,7 @@ const ItemDetail = ({ title, imageUrl, imageAlt, description, price, stock }) =>
             <h2>{title}</h2>
           </Box>
           <Box>
-            <h1>${price}</h1>
+            <h3>{stock ? `$${price}` : `-`}</h3>
           </Box>
           <Box>
             <p>{description}</p>

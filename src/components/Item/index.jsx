@@ -13,7 +13,7 @@ const Item = ({ id, title, category, imageUrl, imageAlt, description, price, sto
   // <Skeleton isLoaded={load}>
   return (
     <>
-      <Box className="mv4 h-card w-100" maxW="sm" borderRadius="xl" overflow="hidden" color="white">
+      <Box className="ma4 h-card w-100" maxW="sm" borderRadius="xl" overflow="hidden" color="white">
         {stock === 0 ? (
           <Box className="absolute ml2 mt1">
             <Badge borderRadius="full" px="2" colorScheme="red">
@@ -27,12 +27,18 @@ const Item = ({ id, title, category, imageUrl, imageAlt, description, price, sto
             {title}
           </Box>
           <Box className="f4" as="span">
-            ${price}
+            {stock ? `$${price}` : `-`}
           </Box>
-          <Box className="">
-            <Button className="flex" size="sm" backgroundColor="#ff9700">
-              {stock ? <NavLink to={`/product/${id}`}>Ver más</NavLink> : <span>Sin Stock</span>}
-            </Button>
+          <Box>
+            {stock ? (
+              <Button className="flex" size="sm" backgroundColor="#ff9700">
+                <NavLink to={`/product/${id}`}>Ver más</NavLink>
+              </Button>
+            ) : (
+              <Button className="flex not-allowed" size="sm" backgroundColor="grey">
+                <span className="not-allowed">Sin Stock</span>
+              </Button>
+            )}
           </Box>
         </Box>
       </Box>
@@ -49,6 +55,9 @@ const Item = ({ id, title, category, imageUrl, imageAlt, description, price, sto
         }
         .img-shadow {
           box-shadow: inset 0px -94px 37px -37px rgba(0, 0, 0, 0.7);
+        }
+        .not-allowed {
+          cursor: not-allowed;
         }
       `}</style>
     </>
