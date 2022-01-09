@@ -1,25 +1,46 @@
-import React from 'react';
-import { HStack, Button, Input, useNumberInput } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { HStack, Button, Input } from '@chakra-ui/react';
 
-const ItemCount = ({ stock }) => {
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
-    step: 1,
-    defaultValue: 1,
-    min: 1,
-    max: stock
-  });
-  const inc = getIncrementButtonProps();
-  const dec = getDecrementButtonProps();
-  const input = getInputProps({ isReadOnly: true });
+// el boton hay que tener cuidado porque no se puede enviar si supera los rangos del stock.
+
+const ItemCount = ({ stock, initial, onAdd }) => {
+  const [quantity, setQuantity] = useState(initial);
+
+  const handleClick = e => {
+    e === '+' ? setQuantity(quantity + 1) : setQuantity(quantity - 1);
+  };
+
+  const handleAdd = () => {
+    if (quantity === 0 || quantity > stock) return;
+    onAdd(quantity);
+  };
+
   return (
     <>
       {stock ? (
         <HStack maxW="150px">
-          <Button {...dec} colorScheme="teal">
+          <Button
+            isDisabled={quantity === 1}
+            className="bg-white primary"
+            onClick={handleClick('+')}
+          >
             -
           </Button>
-          <Input className="tc" {...input} />
-          <Button {...inc} colorScheme="teal">
+          <Input
+            isRequired
+            borderColor={quantity > stock ? 'red' : 'white'}
+            focusBorderColor={quantity > stock ? 'red.500' : 'white'}
+            className="w-10 tc"
+            type="number"
+            value={quantity > 0 ? quantity : 1}
+            onChange={e => setQuantity(parseInt(e.target.value))}
+            onClick={e => e.target.select()}
+          />
+          <Button
+            isDisabled={quantity >= stock}
+            className="bg-white primary"
+            onClick={handleClick()}
+          >
             +
           </Button>
         </HStack>
@@ -28,6 +49,13 @@ const ItemCount = ({ stock }) => {
           <p className="red">No hay stock</p>
         </>
       )}
+      <Button
+        isDisabled={quantity > stock || quantity === 0}
+        className="bg-white primary br-pill"
+        onClick={handleAdd}
+      >
+        Agregar al carrito
+      </Button>
     </>
   );
 };

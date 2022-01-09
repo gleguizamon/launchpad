@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import ItemCount from '../ItemCount';
-import { Image, Box, Flex } from '@chakra-ui/react';
+import { Image, Box, Flex, Button } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
-const ItemDetail = ({ title, imageUrl, imageAlt, description, price, stock }) => {
-  const [count, setCount] = useState();
+const ItemDetail = ({ item, addItem }) => {
+  const { title, imageUrl, imageAlt, description, price, stock } = item;
+  console.warn(item);
+  const { count, setCount } = useState();
+  const navigate = useNavigate();
+
+  const processBuy = () => {
+    addItem({ item, count });
+    navigate('/cart');
+  };
 
   return (
     <>
@@ -15,12 +24,18 @@ const ItemDetail = ({ title, imageUrl, imageAlt, description, price, stock }) =>
           <Flex className="w-50 flex-column items-center white">
             <h1 className="b f3 mt2">{title}</h1>
             <h2 className="f5 mt2">{description}</h2>
-            <span className="b f5 mv2">{stock ? `$${price}` : `-`}</span>
+            <span className="b f5 mt2">{stock ? `$${price}` : ''}</span>
+            <span className="f5 mb2">{stock ? 'Cantidad:' : ''}</span>
             {!count ? (
-              <ItemCount stock={stock} onAdd={setCount} />
+              <>
+                <ItemCount stock={stock} initial={1} onAdd={setCount} />
+                <span className="f5 mt2">{stock ? `(${stock} disponibles)` : ''}</span>
+              </>
             ) : (
               <>
-                <button>Terminar compra</button>
+                <Button className="bg-white primary br-pill" onClick={processBuy}>
+                  Terminar compra
+                </Button>
               </>
             )}
           </Flex>

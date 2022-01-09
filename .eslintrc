@@ -1,6 +1,11 @@
 {
-  "extends": ["standard", "react-app", "plugin:prettier/recommended"],
-  "plugins": ["react-hooks"],
+  "extends": [
+    "standard",
+    "react-app",
+    "plugin:flowtype/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["react-hooks", "flowtype", "prettier"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {

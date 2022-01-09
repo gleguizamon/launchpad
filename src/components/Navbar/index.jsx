@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import logo from '../../assets/darkLogo.png';
 import isologo from '../../assets/darkLogo-small.png';
 import DropdownMenu from '../DropdownMenu';
+import CartWidget from '../CartWidget';
 import { Link, NavLink } from 'react-router-dom';
-import { BiCart, BiSearchAlt, BiChevronDown } from 'react-icons/bi';
+import { BiSearchAlt, BiChevronDown } from 'react-icons/bi';
 import {
   Button,
   Box,
@@ -92,9 +93,7 @@ export default function Navbar() {
                 </MenuList>
               </Menu>
             </Box>
-            <Button colorScheme="white" className="shadow-4">
-              <BiCart className="f3 primary" />
-            </Button>
+            <CartWidget />
           </Box>
         </Box>
 
@@ -105,9 +104,7 @@ export default function Navbar() {
               <img className="w-20" src={isologo} alt="logo" />
             </Box>
           </Link>
-          <Button colorScheme="white" className="shadow-4">
-            <BiCart className="f3 primary" />
-          </Button>
+          {/* Acá va el cartWidget */}
         </Box>
 
         <style jsx>{`
