@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import logo from '../../assets/logo-black.png';
-import isologo from '../../assets/logo-black-small.png';
+import logo from '../../assets/darkLogo.png';
+import isologo from '../../assets/darkLogo-small.png';
 import DropdownMenu from '../DropdownMenu';
 import CartWidget from '../CartWidget';
 import { Link, NavLink } from 'react-router-dom';

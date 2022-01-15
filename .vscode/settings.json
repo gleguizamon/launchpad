@@ -4,8 +4,6 @@
   "search.exclude": {
     "**/node_modules": true,
     "**/build": true,
-    "**/flow-typed": true,
-    "**/scripts": true,
     "**/yarn.lock": true,
   },
   "editor.formatOnSave": true,
