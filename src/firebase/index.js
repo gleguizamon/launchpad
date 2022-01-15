@@ -16,3 +16,16 @@ export const getFirebase = () => {
 export const getFirestore = () => {
   return firebase.firestore(app);
 };
+
+// agregar este codigo al itemlist y a itemdetailcontainer
+
+// import { getFirestore } from '../../firebase';
+// useEffect(() => {
+//   const db = getFirestore();
+//   const itemsCollection = db.collection('items');
+//   itemsCollection.get().then(value => {
+//     value.docs.map(e => {
+//       return { ...e.data(), id: e.id };
+//     });
+//   });
+// }, []);
