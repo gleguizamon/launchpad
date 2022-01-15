@@ -1,26 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BiCart } from 'react-icons/bi';
-import { Button } from '@chakra-ui/react';
-import { BsFillCircleFill } from 'react-icons/bs';
+import { Button, Box } from '@chakra-ui/react';
+import { CartContext } from '../../context/CartContext';
 
-export const CartWidget = ({ hasItem = true }) => {
+const CartWidget = () => {
+  const { cart } = useContext(CartContext);
+  const quantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <>
-      {hasItem ? (
-        <Button colorScheme="white" className="shadow-4">
-          <BsFillCircleFill className="absolute widget f6 primary" />
-          {/* Poner contador aquí, activado por hasItem */}
-          <BiCart className="f3 primary" />
-        </Button>
-      ) : (
-        <Button colorScheme="white" className="shadow-4">
-          <BiCart className="f3 primary" />
-        </Button>
-      )}
+      <Button colorScheme="white" className="shadow-4">
+        <BiCart className="f3 primary" />
+        {cart.length === 0 && (
+          <Box className="absolute widget f4 bg-dark white w-40 br-100">{quantity}</Box>
+        )}
+      </Button>
       <style jsx>{`
         .widget {
-          top: -5px;
-          right: -5px;
+          top: -8px;
+          right: -8px;
         }
       `}</style>
     </>
