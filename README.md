@@ -1,6 +1,6 @@
 <p align="center">
   <a href="...">
-    <img alt="Launchpad" height="125" src="https://github.com/gleguizamon/launchpad/blob/develop/src/assets/logo.png?raw=true">
+    <img alt="Launchpad" height="125" src="https://github.com/gleguizamon/launchpad/blob/develop/src/assets/whiteLogo.png?raw=true">
   </a><br>
 <strong>Launchpad</strong> es un <strong>e-commerce</strong> inspirado en <a href="https://bigbox.com.ar">BigBox</a> construido sobre <a href="https://reactjs.org/">ReactJs</a>.
 </p>
