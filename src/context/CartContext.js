@@ -8,32 +8,20 @@ export const CartContext = createContext();
 export const CartProvider = ({ defaultValue = [], children }) => {
   const [cart, setCart] = useState(defaultValue);
 
-  const isInCart = id => {
-    const filtered = cart.find(i => i.item.id === id);
-    return filtered !== undefined;
-  };
-
-  const addItem = item => {
-    const filtered = cart.find(i => i.item.id === item.id);
-    if (filtered) {
-      filtered.quantity++;
-      setCart([...cart]);
-    } else {
-      setCart([...cart, { item, quantity: 1 }]);
-    }
-  };
-
-  const removeItem = id => {
-    const filtered = cart.filter(i => i.item.id !== id);
-    setCart([...filtered]);
+  const addToCart = product => {
+    setCart([...cart, product]);
   };
 
   const clear = () => {
     setCart([]);
   };
 
+  const isInCart = id => {
+    return cart.find(item => item.id === id);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, isInCart, addItem, removeItem, clear }}>
+    <CartContext.Provider value={{ cart, isInCart, addToCart, clear }}>
       {children}
     </CartContext.Provider>
   );

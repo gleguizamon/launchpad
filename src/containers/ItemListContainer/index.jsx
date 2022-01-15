@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ItemList from '../../components/ItemList';
 import { useParams } from 'react-router-dom';
 import { products } from '../../mocks/async-mock';
+import { getFirestore } from '../../firebase';
 
 const ItemListContainer = ({ greeting }) => {
   const [items, setItems] = useState([]);
@@ -26,6 +27,16 @@ const ItemListContainer = ({ greeting }) => {
       })
       .finally(() => setLoading(false));
   }, [categoryId]);
+
+  useEffect(() => {
+    const db = getFirestore();
+    const itemsCollection = db.collection('items');
+    itemsCollection.get().then(value => {
+      value.docs.map(e => {
+        return { ...e.data(), id: e.id };
+      });
+    });
+  }, []);
 
   return loading ? (
     <span className="db f4 b mt2 ml3 primary">CARGANDO...</span>
