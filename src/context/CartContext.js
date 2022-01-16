@@ -1,28 +1,51 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-export const CartContext = createContext();
+const context = createContext();
 
-/**
- * @param {*} param0
- */
-export const CartProvider = ({ defaultValue = [], children }) => {
-  const [cart, setCart] = useState(defaultValue);
+const { Provider } = context;
+
+export const useCartContext = () => {
+  return useContext(context);
+};
+
+const CartContext = ({ children }) => {
+  const [cart, setCart] = useState([]);
 
   const addToCart = product => {
     setCart([...cart, product]);
   };
 
-  const clear = () => {
+  const removeFromCart = product => {
+    setCart(cart.filter(item => item.id !== product.id));
+  };
+
+  const clearCart = () => {
     setCart([]);
   };
 
-  const isInCart = id => {
-    return cart.find(item => item.id === id);
+  const clearItem = product => {
+    setCart(cart.filter(item => item.id !== product.id));
   };
 
+  const isInCart = product => {
+    return cart.some(item => item.id === product.id);
+  };
+
+  console.warn(cart);
   return (
-    <CartContext.Provider value={{ cart, isInCart, addToCart, clear }}>
+    <Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        clearItem,
+        isInCart
+      }}
+    >
       {children}
-    </CartContext.Provider>
+    </Provider>
   );
 };
+
+export default CartContext;
