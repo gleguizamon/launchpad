@@ -2,20 +2,19 @@ import React from 'react';
 import { BiCart } from 'react-icons/bi';
 import { Button, Box } from '@chakra-ui/react';
 import { useCartContext } from '../../context/CartContext';
+import { Link } from 'react-router-dom';
 
 const CartWidget = () => {
-  const { cart } = useCartContext();
-  const total = cart.reduce((acc, item) => acc + item.price, 0);
+  const { cartItems } = useCartContext();
+
   return (
     <>
-      <Button colorScheme="white" className="shadow-4">
-        <BiCart className="f3 primary" />
-        {cart.length > 0 && (
-          <Box className="ml-2">
-            <span className="f3">{total}</span>
-          </Box>
-        )}
-      </Button>
+      <Link to="/cart">
+        <Button colorScheme="white" className="shadow-4">
+          <BiCart className="f3 primary" />
+          {cartItems.length > 0 && <Box className="f3">{cartItems.length}</Box>}
+        </Button>
+      </Link>
       <style jsx>{`
         .widget {
           top: -8px;

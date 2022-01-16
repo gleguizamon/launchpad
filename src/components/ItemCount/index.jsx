@@ -2,21 +2,32 @@ import React, { useState } from 'react';
 import { HStack, Button, Input } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
-const ItemCount = ({ item, initial, addToCart, removeFromCart }) => {
+const ItemCount = ({ item, initial, onAdd }) => {
   const [count, setCount] = useState(initial);
-
-  const handleChange = e => {
-    setCount(e.target.value);
-  };
+  const [processBuy, setProcessBuy] = useState(false);
 
   const handleAdd = () => {
-    addToCart(item, count);
-    setCount(initial);
+    if (count < item.stock) {
+      setCount(count + 1);
+    }
   };
 
   const handleRemove = () => {
-    removeFromCart(item, count);
-    setCount(initial);
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
+  const handleChange = e => {
+    const value = e.target.value;
+    if (value > 0 && value <= item.stock) {
+      setCount(value);
+    }
+  };
+
+  const onAddItem = () => {
+    setProcessBuy(true);
+    onAdd(count);
   };
 
   return (
@@ -48,15 +59,17 @@ const ItemCount = ({ item, initial, addToCart, removeFromCart }) => {
           <Button
             isDisabled={count > item.stock || count === 0}
             className="bg-white primary br-pill"
-            onClick={handleAdd}
+            onClick={onAddItem}
           >
             Agregar al carrito
           </Button>
-          <NavLink to="/cart">
-            <Button className="bg-white primary br-pill">
-              <p>Ir al carrito</p>
-            </Button>
-          </NavLink>
+          {processBuy && (
+            <NavLink to="/cart">
+              <Button className="bg-white primary br-pill">
+                <p>Ir al carrito</p>
+              </Button>
+            </NavLink>
+          )}
         </>
       ) : (
         <>

@@ -1,10 +1,22 @@
 import React from 'react';
-import { Image, Box, Flex } from '@chakra-ui/react';
-import ItemCount from '../ItemCount';
 import { useCartContext } from '../../context/CartContext';
+import { Image, Box, Flex, useToast } from '@chakra-ui/react';
+import ItemCount from '../ItemCount';
 
 const ItemDetail = ({ item }) => {
-  const { addToCart, removeFromCart } = useCartContext();
+  const { addItem } = useCartContext();
+  const toast = useToast();
+
+  const onAdd = quantityToAdd => {
+    toast({
+      title: `Añadiste ${quantityToAdd} items al carrito`,
+      variant: 'left-accent',
+      position: 'top',
+      status: 'success',
+      isClosable: true
+    });
+    addItem(item, quantityToAdd);
+  };
 
   return (
     <>
@@ -22,12 +34,7 @@ const ItemDetail = ({ item }) => {
             <h2 className="f5 mt2">{item.description}</h2>
             <span className="b f5 mt2">{item.stock ? `$${item.price}` : ''}</span>
             <span className="f5 mb2">{item.stock ? 'Cantidad:' : ''}</span>
-            <ItemCount
-              item={item}
-              initial={1}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
-            />
+            <ItemCount item={item} initial={1} onAdd={onAdd} />
           </Flex>
         </Flex>
       </Flex>
