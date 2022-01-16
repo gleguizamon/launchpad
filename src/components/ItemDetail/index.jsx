@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Image, Box, Flex, Button } from '@chakra-ui/react';
+import React from 'react';
+import { Image, Box, Flex } from '@chakra-ui/react';
 import ItemCount from '../ItemCount';
+import { useCartContext } from '../../context/CartContext';
 
-const ItemDetail = ({ item, addToCart }) => {
-  const { count, setCount } = useState();
-  const navigate = useNavigate();
-  // Cuando el estado interno de ItemDetail tenga la cantidad de ítems solicitados, mostrar en su lugar un botón que diga “Terminar mi compra”
-  const handleAdd = () => {
-    addToCart({ item, count });
-    navigate('/cart');
-  };
-
-  // process buy
+const ItemDetail = ({ item }) => {
+  const { addToCart, removeFromCart } = useCartContext();
 
   return (
     <>
@@ -30,13 +22,12 @@ const ItemDetail = ({ item, addToCart }) => {
             <h2 className="f5 mt2">{item.description}</h2>
             <span className="b f5 mt2">{item.stock ? `$${item.price}` : ''}</span>
             <span className="f5 mb2">{item.stock ? 'Cantidad:' : ''}</span>
-            {!count ? (
-              <ItemCount stock={item.stock} initial={1} onAdd={count => setCount(count)} />
-            ) : (
-              <Button className="bg-white primary br-pill" onClick={handleAdd}>
-                Terminar compra
-              </Button>
-            )}
+            <ItemCount
+              item={item}
+              initial={1}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+            />
           </Flex>
         </Flex>
       </Flex>

@@ -55,9 +55,6 @@ export default function Navbar() {
                   h="1.75rem"
                   size="sm"
                   backgroundColor="transparent"
-                  onClick={e => {
-                    alert('clicked', e.target.value);
-                  }}
                 >
                   <BiSearchAlt className="f3" />
                 </Button>
@@ -104,7 +101,7 @@ export default function Navbar() {
               <img className="w-20" src={isologo} alt="logo" />
             </Box>
           </Link>
-          {/* Acá va el cartWidget */}
+          {/* Acá va el cartWidget para mobile */}
         </Box>
 
         <style jsx>{`

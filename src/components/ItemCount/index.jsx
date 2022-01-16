@@ -1,63 +1,62 @@
 import React, { useState } from 'react';
 import { HStack, Button, Input } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
-// el boton hay que tener cuidado porque no se puede enviar si supera los rangos del stock.
+const ItemCount = ({ item, initial, addToCart, removeFromCart }) => {
+  const [count, setCount] = useState(initial);
 
-const ItemCount = ({ stock, initial, onAdd }) => {
-  const [quantity, setQuantity] = useState(initial);
-
-  const handleClick = e => {
-    const value = e.target.value;
-    if (value < 0) return;
-    if (value > stock) return;
-    setQuantity(value);
+  const handleChange = e => {
+    setCount(e.target.value);
   };
 
   const handleAdd = () => {
-    console.warn(quantity);
-    if (quantity === 0) return;
-    if (quantity > stock) return;
-    // si se puede comentar dos líneas superiores
-    onAdd(quantity);
+    addToCart(item, count);
+    setCount(initial);
+  };
+
+  const handleRemove = () => {
+    removeFromCart(item, count);
+    setCount(initial);
   };
 
   return (
     <>
-      {stock ? (
+      {item.stock ? (
         <>
           <HStack maxW="150px">
-            <Button
-              isDisabled={quantity === 1}
-              className="bg-white primary"
-              onClick={() => handleClick(-1)}
-            >
+            <Button isDisabled={count === 1} className="bg-white primary" onClick={handleRemove}>
               -
             </Button>
             <Input
               isRequired
-              borderColor={quantity > stock ? 'red' : 'white'}
-              focusBorderColor={quantity > stock ? 'red.500' : 'white'}
+              borderColor={count > item.stock ? 'red' : 'white'}
+              focusBorderColor={count > item.stock ? 'red.500' : 'white'}
               className="w-10 tc"
               type="number"
-              value={quantity > 0 ? quantity : 1}
-              onChange={e => setQuantity(parseInt(e.target.value))}
+              value={count > 0 ? count : 1}
+              onChange={handleChange}
               onClick={e => e.target.select()}
             />
             <Button
-              isDisabled={quantity >= stock}
+              isDisabled={count >= item.stock}
               className="bg-white primary"
-              onClick={() => handleClick(+1)}
+              onClick={handleAdd}
             >
               +
             </Button>
           </HStack>
           <Button
-            isDisabled={quantity > stock || quantity === 0}
+            isDisabled={count > item.stock || count === 0}
             className="bg-white primary br-pill"
             onClick={handleAdd}
           >
             Agregar al carrito
           </Button>
+          <NavLink to="/cart">
+            <Button className="bg-white primary br-pill">
+              <p>Ir al carrito</p>
+            </Button>
+          </NavLink>
         </>
       ) : (
         <>
