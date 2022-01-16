@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import ItemList from '../ItemList';
+import ItemList from '../../components/ItemList';
 import { useParams } from 'react-router-dom';
 import { products } from '../../mocks/async-mock';
 

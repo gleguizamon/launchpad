@@ -1,28 +1,63 @@
-import React from 'react';
-import { HStack, Button, Input, useNumberInput } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { HStack, Button, Input } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
 
-const ItemCount = ({ stock }) => {
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } = useNumberInput({
-    step: 1,
-    defaultValue: 1,
-    min: 1,
-    max: stock
-  });
-  const inc = getIncrementButtonProps();
-  const dec = getDecrementButtonProps();
-  const input = getInputProps({ isReadOnly: true });
+const ItemCount = ({ item, initial, addToCart, removeFromCart }) => {
+  const [count, setCount] = useState(initial);
+
+  const handleChange = e => {
+    setCount(e.target.value);
+  };
+
+  const handleAdd = () => {
+    addToCart(item, count);
+    setCount(initial);
+  };
+
+  const handleRemove = () => {
+    removeFromCart(item, count);
+    setCount(initial);
+  };
+
   return (
     <>
-      {stock ? (
-        <HStack maxW="150px">
-          <Button {...dec} colorScheme="teal">
-            -
+      {item.stock ? (
+        <>
+          <HStack maxW="150px">
+            <Button isDisabled={count === 1} className="bg-white primary" onClick={handleRemove}>
+              -
+            </Button>
+            <Input
+              isRequired
+              borderColor={count > item.stock ? 'red' : 'white'}
+              focusBorderColor={count > item.stock ? 'red.500' : 'white'}
+              className="w-10 tc"
+              type="number"
+              value={count > 0 ? count : 1}
+              onChange={handleChange}
+              onClick={e => e.target.select()}
+            />
+            <Button
+              isDisabled={count >= item.stock}
+              className="bg-white primary"
+              onClick={handleAdd}
+            >
+              +
+            </Button>
+          </HStack>
+          <Button
+            isDisabled={count > item.stock || count === 0}
+            className="bg-white primary br-pill"
+            onClick={handleAdd}
+          >
+            Agregar al carrito
           </Button>
-          <Input className="tc" {...input} />
-          <Button {...inc} colorScheme="teal">
-            +
-          </Button>
-        </HStack>
+          <NavLink to="/cart">
+            <Button className="bg-white primary br-pill">
+              <p>Ir al carrito</p>
+            </Button>
+          </NavLink>
+        </>
       ) : (
         <>
           <p className="red">No hay stock</p>

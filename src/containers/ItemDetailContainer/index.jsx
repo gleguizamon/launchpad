@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { products } from '../../mocks/async-mock';
-import ItemDetail from '../ItemDetail';
+import ItemDetail from '../../components/ItemDetail';
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState();
@@ -25,7 +24,7 @@ const ItemDetailContainer = () => {
       .finally(() => setLoading(false));
   }, [itemId]);
 
-  return loading ? <h2>CARGANDO...</h2> : <ItemDetail {...product} />;
+  return loading ? <h2>CARGANDO...</h2> : <ItemDetail item={product} />;
 };
 
 export default ItemDetailContainer;
