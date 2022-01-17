@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Box, Badge, Button, Image } from '@chakra-ui/react';
 
 const Item = ({ id, title, imageUrl, imageAlt, price, stock }) => (
@@ -18,12 +18,12 @@ const Item = ({ id, title, imageUrl, imageAlt, price, stock }) => (
           {title}
         </Box>
         <Box className="f4" as="span">
-          {stock ? `$${price}` : '-'}
+          {stock ? `$${price.toFixed(2)}` : '-'}
         </Box>
         <Box>
           {stock ? (
             <Button className="flex" size="sm" backgroundColor="#ff9700">
-              <NavLink to={`/product/${id}`}>Ver más</NavLink>
+              <Link to={`/product/${id}`}>Ver más</Link>
             </Button>
           ) : (
             <Button className="flex not-allowed" size="sm" backgroundColor="grey">
@@ -36,9 +36,6 @@ const Item = ({ id, title, imageUrl, imageAlt, price, stock }) => (
     <style jsx>{`
       .h-card {
         height: 13rem;
-      }
-      .fit {
-        object-fit: cover;
       }
       .top-custom {
         top: -3rem;

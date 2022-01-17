@@ -1,65 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import logo from '../../assets/darkLogo.png';
 import isologo from '../../assets/darkLogo-small.png';
 import DropdownMenu from '../DropdownMenu';
 import CartWidget from '../CartWidget';
-import { Link, NavLink } from 'react-router-dom';
-import { BiSearchAlt, BiChevronDown } from 'react-icons/bi';
-import {
-  Button,
-  Box,
-  InputGroup,
-  Input,
-  InputRightElement,
-  Spacer,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem
-} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { BiChevronDown } from 'react-icons/bi';
+import { Button, Box, Spacer, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 
-export default function Navbar() {
-  const [search, setSearch] = useState('');
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.warn(search);
-  };
-
+const Navbar = () => {
   return (
     <>
-      <nav className="flex items-center ph3 h-nav bg-white primary overflow-hidden">
-        <Box className="w-100 mw9 center dn flex-l">
+      <nav className="center flex items-center ph3 h-nav bg-white primary overflow-hidden">
+        <Box className="w-100 center mw9 dn flex-l">
           <Box className="flex items-center w-20">
             <Link to="/">
               <Box className="overflow-auto fl h-auto" w="175px">
                 <img src={logo} alt="logo" />
               </Box>
             </Link>
-          </Box>
-          <Spacer />
-          <Box className="w-30 flex items-center">
-            <InputGroup>
-              <Input
-                className="pr-search"
-                type="text"
-                placeholder="Buscar..."
-                value={search}
-                focusBorderColor="black"
-                isInvalid
-                errorBorderColor="black"
-                onChange={e => setSearch(e.target.value)}
-                onSubmit={handleSubmit}
-              />
-              <InputRightElement width="4.5rem" className="bl b--black">
-                <Button
-                  h="1.75rem"
-                  size="sm"
-                  backgroundColor="transparent"
-                >
-                  <BiSearchAlt className="f3" />
-                </Button>
-              </InputRightElement>
-            </InputGroup>
           </Box>
           <Spacer />
           <Box className="flex items-center">
@@ -76,16 +34,16 @@ export default function Navbar() {
                 </MenuButton>
                 <MenuList color="black" bg="white">
                   <MenuItem>
-                    <NavLink to="/">Todas</NavLink>
+                    <Link to="/">Todas</Link>
                   </MenuItem>
                   <MenuItem>
-                    <NavLink to="/category/aventura">Aventura</NavLink>
+                    <Link to="/category/aventura">Aventura</Link>
                   </MenuItem>
                   <MenuItem>
-                    <NavLink to="/category/gastronomia">Gastronomía</NavLink>
+                    <Link to="/category/gastronomia">Gastronomía</Link>
                   </MenuItem>
                   <MenuItem>
-                    <NavLink to="/category/estadias">Estadías</NavLink>
+                    <Link to="/category/estadias">Estadías</Link>
                   </MenuItem>
                 </MenuList>
               </Menu>
@@ -94,7 +52,7 @@ export default function Navbar() {
           </Box>
         </Box>
 
-        <Box className="w-100 mw9 center flex justify-between dn-l">
+        <Box className="w-100 center mw9 flex justify-between dn-l">
           <DropdownMenu />
           <Link to="/">
             <Box className="flex justify-center overflow-auto h-auto" w="175px">
@@ -113,10 +71,8 @@ export default function Navbar() {
           }
         `}</style>
       </nav>
-      {/* <ButtonGroup className="primary" size="sm" isAttached variant="outline">
-        <Button mr="-px">Save</Button>
-        <IconButton aria-label="Cart" icon={<BiCart className="f3 primary pointer" />} />
-      </ButtonGroup> */}
     </>
   );
-}
+};
+
+export default Navbar;

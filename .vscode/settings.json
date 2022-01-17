@@ -8,7 +8,7 @@
   },
   "editor.formatOnSave": true,
   "javascript.format.enable": false,
-  "workbench.editor.enablePreview": false,
-  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editor.enablePreview": true,
+  "workbench.editor.enablePreviewFromQuickOpen": true,
   "typescript.disableAutomaticTypeAcquisition": true
 }

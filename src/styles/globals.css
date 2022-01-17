@@ -39,3 +39,6 @@ a {
 .bg-dark {
   background-color: #131415;
 }
+.fit {
+  object-fit: cover;
+}

@@ -31,7 +31,7 @@ const ItemListContainer = ({ greeting }) => {
   ) : (
     <>
       <h3 className="tc f2 b mt2 primary">{greeting}</h3>
-      <div className="mv5-l mv4-m mv3 mw9 center flex flex-wrap justify-around">
+      <div className="mv5-l mv4-m mv3 center mw9 flex flex-wrap justify-around">
         <ItemList items={items} />
       </div>
     </>

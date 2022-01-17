@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCartContext } from '../../context/CartContext';
-import { Image, Box, Flex, useToast } from '@chakra-ui/react';
+import { Image, Box, Flex, useToast, Button } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import ItemCount from '../ItemCount';
 
 const ItemDetail = ({ item }) => {
+  const [showItemCount, setShowItemCount] = useState(true);
   const { addItem } = useCartContext();
   const toast = useToast();
 
-  const onAdd = quantityToAdd => {
+  const onAdd = quantity => {
+    // isInCart(item.id) ? toast({ status: 'error', title: 'Item ya en el carro' }) : addItem(item);
+    setShowItemCount(false);
+    addItem(item, quantity);
     toast({
-      title: `Añadiste ${quantityToAdd} items al carrito`,
-      variant: 'left-accent',
-      position: 'top',
+      title: 'Agregado al carrito',
+      position: 'bottom-right',
+      description: `${item.title} agregado al carrito`,
       status: 'success',
+      duration: 3000,
       isClosable: true
     });
-    addItem(item, quantityToAdd);
   };
 
   return (
@@ -33,16 +38,21 @@ const ItemDetail = ({ item }) => {
             <h1 className="b f3 mt2">{item.title}</h1>
             <h2 className="f5 mt2">{item.description}</h2>
             <span className="b f5 mt2">{item.stock ? `$${item.price}` : ''}</span>
-            <span className="f5 mb2">{item.stock ? 'Cantidad:' : ''}</span>
-            <ItemCount item={item} initial={1} onAdd={onAdd} />
+            {showItemCount ? (
+              <ItemCount stock={item.stock} initial={1} onAdd={onAdd} />
+            ) : (
+              <div>
+                <Link to="/cart">
+                  <Button variant="outline">Terminar mi compra</Button>
+                </Link>
+                <Link to="/">
+                  <Button className="black">Seguir comprando </Button>
+                </Link>
+              </div>
+            )}
           </Flex>
         </Flex>
       </Flex>
-      <style jsx>{`
-        .fit {
-          object-fit: cover;
-        }
-      `}</style>
     </>
   );
 };
