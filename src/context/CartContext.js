@@ -11,13 +11,14 @@ const CartProvider = ({ children }) => {
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [items, setItems] = useState([]);
 
-  const addItem = (product, quantity) => {
-    if (isInCart(product.id)) {
-      const item = items.find(item => item.id === product.id);
+  const addItem = (productId, quantity) => {
+    if (isInCart(productId)) {
+      const item = items.find(item => item.id === productId);
+      console.warn(item);
       item.quantity += quantity;
     } else {
       const newItems = [...items];
-      newItems.push({ ...product, quantity });
+      newItems.push({ ...productId, quantity });
 
       setItems(newItems);
     }
@@ -25,15 +26,16 @@ const CartProvider = ({ children }) => {
     setTotalQuantity(totalQuantity + quantity);
   };
 
-  const removeItem = product => {
-    const item = items.find(item => item.id === product.id);
+  const removeItem = productId => {
+    const item = items.find(item => item.id === productId);
     setTotalQuantity(totalQuantity - item.quantity);
-    const newItems = items.filter(item => item.id !== product.id);
+    const newItems = items.filter(item => item.id !== productId);
     setItems(newItems);
+    console.warn(items);
   };
 
-  const isInCart = product => {
-    const item = items.find(item => item.id === product.id);
+  const isInCart = productId => {
+    const item = items.find(item => item.id === productId);
     return item ? true : false;
   };
 

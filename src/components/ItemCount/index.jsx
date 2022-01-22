@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Box, HStack, Button } from '@chakra-ui/react';
+import { Box, HStack, Button, useToast } from '@chakra-ui/react';
 
 const ItemCount = ({ stock, initial, onAdd }) => {
   const [count, setCount] = useState(initial);
+  const toast = useToast();
 
   const handleAdd = () => {
     if (count < stock) {
+      stock = stock - count;
       setCount(count + 1);
     }
   };
@@ -17,7 +19,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
   };
 
   const handleBuy = () => {
-    stock >= count && onAdd(count);
+    stock >= count ? onAdd(count) : toast({ status: 'error', title: 'No hay stock' });
   };
 
   return (

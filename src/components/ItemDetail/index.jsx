@@ -10,13 +10,14 @@ const ItemDetail = ({ item }) => {
   const toast = useToast();
 
   const onAdd = quantity => {
-    // isInCart(item.id) ? toast({ status: 'error', title: 'Item ya en el carro' }) : addItem(item);
+    // test ? toast({ status: 'error', title: 'Item ya en el carro' }) : addItem(item);
+    addItem(item, quantity);
     setShowItemCount(false);
     addItem(item, quantity);
     toast({
       title: 'Agregado al carrito',
       position: 'bottom-right',
-      description: `${item.title} agregado al carrito`,
+      description: `${item.quantity} - ${item.title} agregado/s al carrito`,
       status: 'success',
       duration: 3000,
       isClosable: true

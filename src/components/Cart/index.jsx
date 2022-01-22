@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { items, removeItem, clearCart } = useCartContext();
-
+  console.warn(items);
   return items.length ? (
     <section className="w-90 center mw9">
       <header>
@@ -23,6 +23,7 @@ const Cart = () => {
                 <h3>{payload.title}</h3>
               </Link>
               <p>${payload.price.toFixed(2)}</p>
+              <p>Cantidad: {payload.quantity}</p>
               <Button colorScheme="red" className="pl2" onClick={() => removeItem(payload.id)}>
                 X
               </Button>
@@ -34,10 +35,7 @@ const Cart = () => {
         <h4 className="w-100 flex justify-end mb1">
           Total:
           <span>
-            $
-            {items.reduce((acc, item) => {
-              return acc + item.price.toFixed(2);
-            }, 0)}
+            ${items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
           </span>
         </h4>
         <Flex className="justify-between">
