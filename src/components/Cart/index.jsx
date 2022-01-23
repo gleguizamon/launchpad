@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCartContext } from '../../context/CartContext';
-import { Box, Flex, Button } from '@chakra-ui/react';
+import { Box, Flex, Button, Tooltip } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { cart, removeItem, clearCart } = useCartContext();
+  const [hasStock, setHasStock] = useState(false);
+  const itemsWithOverstock = cart.filter(item => item.stock < item.quantity).map(item => item.name);
+
+  useEffect(() => {
+    cart.filter(item => item.stock < item.quantity).length > 0
+      ? setHasStock(true)
+      : setHasStock(false);
+  }, [cart]);
+
   return cart.length ? (
     <section className="w-90 center mw9">
       <header>
         <h2 className="f2 b tc pv3">Lista de compra</h2>
       </header>
       <Box>
-        {cart.map(payload => {
+        {cart.map(order => {
           return (
             <Flex
               className="h4 br3 mv2 shadow-4 center justify-between items-center bg-white black ba b--black ph3 overflow-hidden"
-              key={payload.id}
+              key={order.id}
             >
-              <Link className="flex items-center w-100 mw7" to={`/product/${payload.id}`}>
-                <img className="br2 w-20 mr4 fit" src={payload.image} alt={payload.name} />
-                <h3>{payload.name}</h3>
+              <Link className="flex items-center w-100 mw7" to={`/product/${order.id}`}>
+                <img className="br2 w-20 mr4 fit" src={order.image} alt={order.name} />
+                <h3>{order.name}</h3>
               </Link>
-              <p>${payload.price.toFixed(2)}</p>
-              <p>Cantidad: {payload.quantity}</p>
-              <Button colorScheme="red" className="pl2" onClick={() => removeItem(payload.id)}>
+              <p>${order.price.toFixed(2)}</p>
+              <p>Stock: {order.stock}</p>
+              <p>Cantidad: {order.quantity}</p>
+              <Button colorScheme="red" className="pl2" onClick={() => removeItem(order.id)}>
                 X
               </Button>
             </Flex>
@@ -45,11 +55,21 @@ const Cart = () => {
                 Ver más productos
               </Button>
             </Link>
-            <Link to="/checkout">
-              <Button colorScheme="purple" variant="solid">
-                Continuar
-              </Button>
-            </Link>
+            <Tooltip
+              isDisabled={!hasStock}
+              hasArrow
+              mt={1}
+              label={`Los siguientes items superaron el limite de unidades: ${itemsWithOverstock}`}
+              bg="gray.300"
+              color="black"
+              closeDelay={500}
+            >
+              <Link to="/checkout">
+                <Button isDisabled={hasStock} colorScheme="purple" variant="solid">
+                  Continuar
+                </Button>
+              </Link>
+            </Tooltip>
           </Box>
         </Flex>
       </footer>
