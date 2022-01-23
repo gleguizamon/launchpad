@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ItemDetail from '../../components/ItemDetail';
 import { useParams } from 'react-router-dom';
-// import { products } from '../../mocks/async-mock';
 import { getFirestore } from '../../firebase';
 
 const ItemDetailContainer = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const { itemId } = useParams();
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const getItems = new Promise(resolve => {
-  //     setTimeout(() => {
-  //       const myData = products.find(product => product.id === itemId);
-  //       resolve(myData);
-  //     }, 2000);
-  //   });
-
-  //   getItems
-  //     .then(res => {
-  //       setItems(res);
-  //     })
-  //     .finally(() => setLoading(false));
-  // }, [itemId]);
 
   useEffect(() => {
     const db = getFirestore();
