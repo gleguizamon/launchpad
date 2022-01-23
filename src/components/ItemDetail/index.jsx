@@ -27,7 +27,7 @@ const ItemDetail = ({ item }) => {
     addItem(item, quantity);
     toast({
       title: 'Agregado al carrito',
-      position: 'top-right',
+      position: 'bottom-right',
       description: `${item.name} agregado al carrito`,
       status: 'success',
       duration: 1500
