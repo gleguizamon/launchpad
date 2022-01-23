@@ -36,13 +36,13 @@ const DropdownMenu = () => {
               <NavLink to="/" onClick={onClose} className="mv1 b">
                 Todas
               </NavLink>
-              <NavLink to="/category/aventura" onClick={onClose} className="mv1 b">
+              <NavLink to="/category/adventure" onClick={onClose} className="mv1 b">
                 Aventura
               </NavLink>
-              <NavLink to="/category/gastronomia" onClick={onClose} className="mv1 b">
+              <NavLink to="/category/gastronomy" onClick={onClose} className="mv1 b">
                 Gastronomía
               </NavLink>
-              <NavLink to="/category/estadias" onClick={onClose} className="mv1 b">
+              <NavLink to="/category/stays" onClick={onClose} className="mv1 b">
                 Estadías
               </NavLink>
             </Flex>

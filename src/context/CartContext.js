@@ -9,46 +9,47 @@ export const useCartContext = () => {
 
 const CartProvider = ({ children }) => {
   const [totalQuantity, setTotalQuantity] = useState(0);
-  const [items, setItems] = useState([]);
+  const [cart, setCart] = useState([]);
 
-  const addItem = (productId, quantity) => {
-    if (isInCart(productId)) {
-      const item = items.find(item => item.id === productId);
-      console.warn(item);
-      item.quantity += quantity;
+  const addItem = (item, quantity) => {
+    const itemExist = isInCart(item.id);
+    if (itemExist) {
+      const order = findCart(item.id);
+      order.quantity += quantity;
     } else {
-      const newItems = [...items];
-      newItems.push({ ...productId, quantity });
+      const newCart = [...cart];
+      newCart.push({ ...item, quantity });
 
-      setItems(newItems);
+      setCart(newCart);
     }
 
     setTotalQuantity(totalQuantity + quantity);
   };
 
   const removeItem = productId => {
-    const item = items.find(item => item.id === productId);
+    const item = findCart(productId);
     setTotalQuantity(totalQuantity - item.quantity);
-    const newItems = items.filter(item => item.id !== productId);
-    setItems(newItems);
-    console.warn(items);
+    const newItems = cart.filter(item => item.id !== productId);
+    setCart(newItems);
   };
 
+  const findCart = id => cart.find(item => item.id === id);
+
   const isInCart = productId => {
-    const item = items.find(item => item.id === productId);
-    return item ? true : false;
+    const order = cart.find(item => item.id === productId);
+    if (order) return true;
   };
 
   const clearCart = () => {
     setTotalQuantity(0);
-    setItems([]);
+    setCart([]);
   };
 
   return (
     <Provider
       value={{
         totalQuantity,
-        items,
+        cart,
         addItem,
         removeItem,
         clearCart

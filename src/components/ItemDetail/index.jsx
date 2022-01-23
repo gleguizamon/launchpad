@@ -13,11 +13,10 @@ const ItemDetail = ({ item }) => {
     // test ? toast({ status: 'error', title: 'Item ya en el carro' }) : addItem(item);
     addItem(item, quantity);
     setShowItemCount(false);
-    addItem(item, quantity);
     toast({
       title: 'Agregado al carrito',
       position: 'bottom-right',
-      description: `${item.quantity} - ${item.title} agregado/s al carrito`,
+      description: `${item.name} agregado al carrito`,
       status: 'success',
       duration: 3000,
       isClosable: true
@@ -31,12 +30,12 @@ const ItemDetail = ({ item }) => {
           <Box className="w-50">
             <Image
               className="fit w-100 h-100 br4 shadow-5"
-              src={item.imageUrl}
-              alt={item.imageAlt}
+              src={item.image}
+              alt={item.name}
             />
           </Box>
           <Flex className="w-50 flex-column items-center white">
-            <h1 className="b f3 mt2">{item.title}</h1>
+            <h1 className="b f3 mt2">{item.name}</h1>
             <h2 className="f5 mt2">{item.description}</h2>
             <span className="b f5 mt2">{item.stock ? `$${item.price}` : ''}</span>
             {showItemCount ? (
