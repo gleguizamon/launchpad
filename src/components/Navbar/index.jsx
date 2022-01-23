@@ -37,13 +37,13 @@ const Navbar = () => {
                     <Link to="/">Todas</Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to="/category/aventura">Aventura</Link>
+                    <Link to="/category/adventure">Aventura</Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to="/category/gastronomia">Gastronomía</Link>
+                    <Link to="/category/gastronomy">Gastronomía</Link>
                   </MenuItem>
                   <MenuItem>
-                    <Link to="/category/estadias">Estadías</Link>
+                    <Link to="/category/stays">Estadías</Link>
                   </MenuItem>
                 </MenuList>
               </Menu>

@@ -1,66 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCartContext } from '../../context/CartContext';
-import { Box, Flex, Button } from '@chakra-ui/react';
+import { Box, Flex, Button, Tooltip } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import OrderTable from '../OrderTable';
+import CheckoutForm from '../CheckoutForm';
 
 const Cart = () => {
-  const { items, removeItem, clearCart } = useCartContext();
-  console.warn(items);
-  return items.length ? (
-    <section className="w-90 center mw9">
-      <header>
-        <h2 className="f2 b tc pv3">Lista de compra</h2>
-      </header>
-      <Box>
-        {items.map(payload => {
-          return (
-            <Flex
-              className="h4 br3 mv2 shadow-4 center justify-between items-center bg-white black ba b--black ph3 overflow-hidden"
-              key={payload.id}
-            >
-              <Link className="flex items-center w-100 mw7" to={`/product/${payload.id}`}>
-                <img className="br2 w-20 mr4 fit" src={payload.imageUrl} alt={payload.imageAlt} />
-                <h3>{payload.title}</h3>
+  const { cart, clearCart } = useCartContext();
+  const [hasStock, setHasStock] = useState(false);
+  const itemsWithOverstock = cart.filter(item => item.stock < item.quantity).map(item => item.name);
+
+  useEffect(() => {
+    cart.filter(item => item.stock < item.quantity).length > 0
+      ? setHasStock(true)
+      : setHasStock(false);
+  }, [cart]);
+
+  return cart.length ? (
+    <>
+      <section className="w-90 center mw8 pv4">
+        <header>
+          <span className="f3 b tl pv3 pl2">Va a comprar:</span>
+        </header>
+        <div className="flex">
+          <OrderTable items={cart} withRemoveItem={true} />
+          <CheckoutForm hasStock={hasStock} itemsWithOverstock={itemsWithOverstock} />
+        </div>
+
+        <footer className="mb5 mt2">
+          <Flex className="justify-between">
+            <Button colorScheme="red" variant="solid" onClick={clearCart}>
+              Limpiar carrito
+            </Button>
+            <Box>
+              <Link to="/">
+                <Button className="mr2" colorScheme="teal" variant="solid">
+                  Ver más productos
+                </Button>
               </Link>
-              <p>${payload.price.toFixed(2)}</p>
-              <p>Cantidad: {payload.quantity}</p>
-              <Button colorScheme="red" className="pl2" onClick={() => removeItem(payload.id)}>
-                X
-              </Button>
-            </Flex>
-          );
-        })}
-      </Box>
-      <footer className="mb5">
-        <h4 className="w-100 flex justify-end mb1">
-          Total:
-          <span>
-            ${items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2)}
-          </span>
-        </h4>
-        <Flex className="justify-between">
-          <Button colorScheme="red" variant="solid" onClick={clearCart}>
-            Limpiar carrito
-          </Button>
-          <Box>
-            <Link to="/">
-              <Button className="mr2" colorScheme="teal" variant="solid">
-                Ver más productos
-              </Button>
-            </Link>
-            <Link to="/checkout">
-              <Button colorScheme="purple" variant="solid">
-                Continuar
-              </Button>
-            </Link>
-          </Box>
-        </Flex>
-      </footer>
-    </section>
+              <Tooltip
+                isDisabled={!hasStock}
+                hasArrow
+                mt={1}
+                label={`Los siguientes items superaron el limite de unidades: ${itemsWithOverstock}`}
+                bg="gray.300"
+                color="black"
+                closeDelay={500}
+              >
+                <Link to="/checkout">
+                  <Button isDisabled={hasStock} colorScheme="purple" variant="solid">
+                    Continuar
+                  </Button>
+                </Link>
+              </Tooltip>
+            </Box>
+          </Flex>
+        </footer>
+      </section>
+    </>
   ) : (
-    <Flex className="justify-center align-center items-center w-100 mt4">
-      <h1 className="f2 b">:(&nbsp; Ups, no hay productos en el carrito.</h1>
-    </Flex>
+    <Box className="w-100 mt4 tc">
+      <h1 className="f2 b">:(&nbsp; Ups, no hay productos en el carrito</h1>
+      <h3 className="f4 underline">
+        <Link to="/">Seguir comprando...</Link>
+      </h3>
+    </Box>
   );
 };
 
