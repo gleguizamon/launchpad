@@ -48,7 +48,7 @@ const ItemsTable = ({ items, withRemoveItem }) => {
         <tfoot>
           <tr>
             <td className="b pt5 black" colSpan="2">
-              Total :{' '}
+              Total:{' '}
             </td>
             <td className="b pt5 black">
               $&nbsp;

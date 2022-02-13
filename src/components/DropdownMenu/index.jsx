@@ -8,8 +8,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerBody,
-  Flex,
-  Input
+  Flex
 } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import { BiMenu } from 'react-icons/bi';
@@ -31,7 +30,6 @@ const DropdownMenu = () => {
             <DrawerCloseButton className="mt2" />
           </DrawerHeader>
           <DrawerBody>
-            <Input id="search" className="mt3" placeholder="Buscar..." />
             <Flex className="flex-column f2 tl mt3">
               <NavLink to="/" onClick={onClose} className="mv1 b">
                 Todas

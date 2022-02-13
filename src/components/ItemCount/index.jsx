@@ -26,7 +26,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
     <>
       {stock ? (
         <Box>
-          <HStack maxW="150px">
+          <HStack maxW="150px" className="center flex justify-center mv1">
             <Button isDisabled={count === 1} className="bg-white primary" onClick={handleRemove}>
               -
             </Button>

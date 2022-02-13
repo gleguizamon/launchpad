@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ItemDetail from '../../components/ItemDetail';
 import { useParams } from 'react-router-dom';
 import { getFirestore } from '../../firebase';
+import { Center, Spinner } from '@chakra-ui/react';
 
 const ItemDetailContainer = () => {
   const [items, setItems] = useState([]);
@@ -31,7 +32,13 @@ const ItemDetailContainer = () => {
       .finally(() => setLoading(false));
   }, [itemId]);
 
-  return loading ? <h2>CARGANDO...</h2> : <ItemDetail item={items} />;
+  return loading ? (
+    <Center h="80vh" color="black">
+      <Spinner size="xl" className="block w-100 h-100" />
+    </Center>
+  ) : (
+    <ItemDetail item={items} />
+  );
 };
 
 export default ItemDetailContainer;

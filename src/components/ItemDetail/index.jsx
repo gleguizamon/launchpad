@@ -45,7 +45,7 @@ const ItemDetail = ({ item }) => {
           <Flex className="w-50 flex-column items-center white">
             <h1 className="b f3 mt2">{item.name}</h1>
             <h2 className="f5 mt2">{item.description}</h2>
-            <span className="b f5 mt2">{item.stock ? `$${item.price}` : ''}</span>
+            <span className="b f5 mv2">{item.stock ? `$${item.price}` : ''}</span>
             <ItemCount stock={item.stock} initial={1} onAdd={onAdd} />
             <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
@@ -57,9 +57,11 @@ const ItemDetail = ({ item }) => {
                 </ModalBody>
 
                 <ModalFooter>
-                  <Button colorScheme="blue" mr={3} onClick={onClose}>
-                    Si
-                  </Button>
+                  <Link to="/">
+                    <Button colorScheme="blue" mr={3} onClick={onClose}>
+                      Si
+                    </Button>
+                  </Link>
                   <Link to="/cart">
                     <Button>No</Button>
                   </Link>

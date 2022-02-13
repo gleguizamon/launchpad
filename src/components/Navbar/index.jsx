@@ -5,21 +5,20 @@ import DropdownMenu from '../DropdownMenu';
 import CartWidget from '../CartWidget';
 import { Link } from 'react-router-dom';
 import { BiChevronDown } from 'react-icons/bi';
-import { Button, Box, Spacer, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { Button, Box, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 
 const Navbar = () => {
   return (
     <>
-      <nav className="center flex items-center ph3 h-nav bg-white primary overflow-hidden">
-        <Box className="w-100 center mw9 dn flex-l">
+      <nav className="center flex z-max items-center ph3 h-nav bg-white primary overflow-hidden">
+        <Box className="w-100 center mw9 dn flex-l justify-between">
           <Box className="flex items-center w-20">
-            <Link to="/">
+            <Link className="center" to="/">
               <Box className="overflow-auto fl h-auto" w="175px">
                 <img src={logo} alt="logo" />
               </Box>
             </Link>
           </Box>
-          <Spacer />
           <Box className="flex items-center">
             <Box className="mr2">
               <Menu>
@@ -59,7 +58,7 @@ const Navbar = () => {
               <img className="w-20" src={isologo} alt="logo" />
             </Box>
           </Link>
-          {/* Acá va el cartWidget para mobile */}
+          <CartWidget />
         </Box>
 
         <style jsx>{`

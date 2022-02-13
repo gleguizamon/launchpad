@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ItemList from '../../components/ItemList';
 import { useParams } from 'react-router-dom';
 import { getFirestore } from '../../firebase';
+import { Center, Spinner } from '@chakra-ui/react';
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
@@ -32,10 +33,11 @@ const ItemListContainer = () => {
   }, [categoryId]);
 
   return loading ? (
-    <span className="db f4 b mt2 ml3 primary">CARGANDO...</span>
+    <Center h="80vh" color="black">
+      <Spinner size="xl" className="block w-100 h-100" />
+    </Center>
   ) : (
     <>
-      {!categoryId ? <h2 className="f2 b tc pv3">Home</h2> : null}
       {categoryId === 'adventure' ? <h2 className="f2 b tc pv3">Aventura</h2> : null}
       {categoryId === 'gastronomy' ? <h2 className="f2 b tc pv3">Gastronomía</h2> : null}
       {categoryId === 'stays' ? <h2 className="f2 b tc pv3">Estadías</h2> : null}

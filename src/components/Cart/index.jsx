@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCartContext } from '../../context/CartContext';
-import { Box, Flex, Button, Tooltip } from '@chakra-ui/react';
+import { Box, Flex, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import OrderTable from '../OrderTable';
 import CheckoutForm from '../CheckoutForm';
@@ -8,7 +8,8 @@ import CheckoutForm from '../CheckoutForm';
 const Cart = () => {
   const { cart, clearCart } = useCartContext();
   const [hasStock, setHasStock] = useState(false);
-  const itemsWithOverstock = cart.filter(item => item.stock < item.quantity).map(item => item.name);
+  const overstockMap = cart.filter(item => item.stock < item.quantity).map(item => item.name);
+  const itemsWithOverstock = overstockMap.join('\n');
 
   useEffect(() => {
     cart.filter(item => item.stock < item.quantity).length > 0
@@ -22,9 +23,9 @@ const Cart = () => {
         <header>
           <span className="f3 b tl pv3 pl2">Va a comprar:</span>
         </header>
-        <div className="flex">
+        <div className="flex-l db">
           <OrderTable items={cart} withRemoveItem={true} />
-          <CheckoutForm hasStock={hasStock} itemsWithOverstock={itemsWithOverstock} />
+          <CheckoutForm hasStock={hasStock} items={cart} itemsWithOverstock={itemsWithOverstock} />
         </div>
 
         <footer className="mb5 mt2">
@@ -38,21 +39,6 @@ const Cart = () => {
                   Ver más productos
                 </Button>
               </Link>
-              <Tooltip
-                isDisabled={!hasStock}
-                hasArrow
-                mt={1}
-                label={`Los siguientes items superaron el limite de unidades: ${itemsWithOverstock}`}
-                bg="gray.300"
-                color="black"
-                closeDelay={500}
-              >
-                <Link to="/checkout">
-                  <Button isDisabled={hasStock} colorScheme="purple" variant="solid">
-                    Continuar
-                  </Button>
-                </Link>
-              </Tooltip>
             </Box>
           </Flex>
         </footer>
