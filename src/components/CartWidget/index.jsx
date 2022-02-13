@@ -18,7 +18,7 @@ const CartWidget = () => {
   if (cart.length === 0) return null;
   const initRef = useRef();
   console.warn(cart.map(item => item.quantity * item.price).reduce((a, b) => a + b, 0));
-  // separar a los items cada 3 digitos
+
   const totalPreviewPrice = cart
     .map(item => item.quantity * item.price)
     .reduce((a, b) => a + b, 0)

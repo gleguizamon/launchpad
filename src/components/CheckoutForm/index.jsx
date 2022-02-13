@@ -29,32 +29,35 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
   };
 
   const handleSubmit = async e => {
+    console.warn(customer);
     e.preventDefault();
-    const order = {
-      customer,
-      items: items
-    };
+    if (customer.name === '' || customer.email === '' || customer.phone === '') {
+      toast({
+        title: 'Error',
+        description: 'Debe completar todos los campos',
+        status: 'error',
+        duration: 5000,
+        isClosable: true
+      });
+      return;
+    } else {
+      const order = {
+        customer,
+        items: items
+      };
 
-    const response = await storeOrder(order);
-    toast({
-      title: 'Order Placed!',
-      description: 'Your order has been placed!',
-      status: 'success',
-      duration: 5000,
-      isClosable: true
-    });
-    clearCart();
-    console.warn('id', response.id);
-    navigate('/order/' + response.id);
-    // } else {
-    //   toast({
-    //     title: 'Error',
-    //     description: 'There was an error placing your order',
-    //     status: 'error',
-    //     duration: 5000,
-    //     isClosable: true
-    //   });
-    // }
+      const response = await storeOrder(order);
+      toast({
+        title: 'Order Placed!',
+        description: 'Your order has been placed!',
+        status: 'success',
+        duration: 5000,
+        isClosable: true
+      });
+      clearCart();
+      console.warn('id', response.id);
+      navigate('/order/' + response.id);
+    }
   };
 
   return (

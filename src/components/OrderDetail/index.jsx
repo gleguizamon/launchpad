@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOrder } from '../../services/CreateOrder';
 import { Table, Thead, Tbody, Tr, Td, Th } from '@chakra-ui/react';
-// import OrderNotFound from './status/OrderNotFound';
 
 const OrderDetail = () => {
   const [order, setOrder] = useState();
