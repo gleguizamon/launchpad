@@ -41,7 +41,7 @@ const CartWidget = () => {
               </PopoverHeader>
               <PopoverArrow />
               <PopoverCloseButton />
-              <PopoverBody className="pt0i">
+              <PopoverBody className="pt0i f6 flex justify-between items-center">
                 <span className="mr3">
                   Cantidad de items: {totalQuantity} {`($${totalPreviewPrice})`}
                 </span>

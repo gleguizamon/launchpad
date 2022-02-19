@@ -18,11 +18,11 @@ const OrderDetail = () => {
 
   return order ? (
     <>
-      <div className="flex">
-        <div className="w-50 ml6">
+      <div className="flex w-100 center justify-center">
+        <div className="w-60">
           <div className="flex flex-column mb4">
-            <h2 className="f2 b">
-              Orden <span className="b red">{idOrder}</span>
+            <h2 className="f2 b mt3 tc">
+              Orden: <span className="b green">{idOrder}</span>
             </h2>
             <div className="pa3 mt3 bg-white bw1 b--gray br4">
               <Table variant="simple">
@@ -31,13 +31,12 @@ const OrderDetail = () => {
                     <Th>Productos</Th>
                     <Th>Cantidad</Th>
                     <Th isNumeric>Precio</Th>
-                    <Th isNumeric>Total</Th>
                   </Tr>
                 </Thead>
-                {order.items.map(product => (
-                  <Tbody key={product.id}>
-                    <Tr>
-                      <Td>
+                <Tbody>
+                  {order.items.map(product => (
+                    <Tr key={product.id}>
+                      <Td className="flex items-center">
                         <img className="br3 w-20 di mr2" src={product.image} alt={product.name} />
                         {product.name}
                       </Td>
@@ -45,21 +44,33 @@ const OrderDetail = () => {
                         x {product.quantity}
                       </Td>
                       <Td isNumeric>
-                        ${product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
-                      </Td>
-                      <Td isNumeric>
                         $
-                        {(product.quantity * product.price)
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                        {(product.price * product.quantity)
+                          .toFixed(2)
+                          .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                       </Td>
                     </Tr>
-                  </Tbody>
-                ))}
+                  ))}
+                  <Tr>
+                    <Td>
+                      <b>Total</b>
+                    </Td>
+                    <Td isNumeric>
+                      <b>
+                        $
+                        {order.items
+                          .map(product => product.price * product.quantity)
+                          .reduce((a, b) => a + b, 0)
+                          .toFixed(2)
+                          .replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                      </b>
+                    </Td>
+                  </Tr>
+                </Tbody>
               </Table>
             </div>
           </div>
-          <div className="pa3 bg-white bw1 b--gray br4">
+          <div className="pa3 bg-white bw1 b--gray br4 mb5">
             <Table variant="simple">
               <Tbody>
                 <Tr>
@@ -83,20 +94,6 @@ const OrderDetail = () => {
               </Tbody>
             </Table>
           </div>
-        </div>
-        <div className="flex flex-column w-30 mt6">
-          <div className="ml4 mb4 pa3 bg-white bw1 b--gray br4">
-            <h3>Orden summary</h3>
-            <br />
-            Orden creada el: {order.createdAt}
-            <br />
-            Subtotal: $20.00
-          </div>
-          <div className="ml4 mb4 pa3 bg-white bw1 b--gray br4">
-            <h3>Total</h3>
-            {order.price}
-          </div>
-          <div className="ml4 mb4 pa3 bg-white bw1 b--gray br4"></div>
         </div>
       </div>
       <style jsx>{`

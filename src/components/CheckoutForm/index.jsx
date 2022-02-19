@@ -16,6 +16,21 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
     phone: ''
   });
 
+  const validateName = name => {
+    const regex = /^[a-zA-Z ]*$/;
+    return regex.test(name);
+  };
+
+  const validatePhone = phone => {
+    const regex = /^\d{10}$/;
+    return regex.test(phone);
+  };
+
+  const validateMail = email => {
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // eslint-disable-line
+    return regex.test(email);
+  };
+
   useEffect(() => {
     if (!hasStock) {
       isDimmed(false);
@@ -29,9 +44,8 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
   };
 
   const handleSubmit = async e => {
-    console.warn(customer);
     e.preventDefault();
-    if (customer.name === '' || customer.email === '' || customer.phone === '') {
+    if (!customer.name || !customer.email || !customer.phone) {
       toast({
         title: 'Error',
         description: 'Debe completar todos los campos',
@@ -39,6 +53,19 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
         duration: 5000,
         isClosable: true
       });
+    } else if (
+      !validateName(customer.name) ||
+      !validatePhone(customer.phone) ||
+      !validateMail(customer.email)
+    ) {
+      toast({
+        title: 'Error',
+        description: 'Los datos ingresados no son válidos',
+        status: 'error',
+        duration: 5000,
+        isClosable: true
+      });
+
       return;
     } else {
       const order = {
@@ -48,8 +75,8 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
 
       const response = await storeOrder(order);
       toast({
-        title: 'Order Placed!',
-        description: 'Your order has been placed!',
+        title: 'Éxito',
+        description: 'Su pedido se ha realizado con éxito',
         status: 'success',
         duration: 5000,
         isClosable: true
@@ -77,8 +104,10 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
           <div className="w-100-l w-70 center">
             <Input
               className="mv1"
-              focusBorderColor="black"
-              errorBorderColor="black"
+              errorBorderColor={
+                customer.name === '' ? 'black' : !validateName(customer.name) ? 'crimson' : 'lime'
+              }
+              focusBorderColor={!validateName(customer.name) ? 'crimson' : 'lime'}
               type="text"
               placeholder="Nombre"
               name="name"
@@ -89,8 +118,14 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
             />
             <Input
               className="mv1"
-              focusBorderColor="black"
-              errorBorderColor="black"
+              errorBorderColor={
+                customer.phone === ''
+                  ? 'black'
+                  : !validatePhone(customer.phone)
+                  ? 'crimson'
+                  : 'lime'
+              }
+              focusBorderColor={!validatePhone(customer.phone) ? 'crimson' : 'lime'}
               type="tel"
               placeholder="Teléfono"
               name="phone"
@@ -101,8 +136,10 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
             />
             <Input
               className="mv1"
-              focusBorderColor="black"
-              errorBorderColor="black"
+              errorBorderColor={
+                customer.email === '' ? 'black' : !validateMail(customer.email) ? 'crimson' : 'lime'
+              }
+              focusBorderColor={!validateMail(customer.email) ? 'crimson' : 'lime'}
               type="email"
               placeholder="Email"
               name="email"

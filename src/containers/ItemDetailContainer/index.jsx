@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ItemDetail from '../../components/ItemDetail';
 import { useParams } from 'react-router-dom';
 import { getFirestore } from '../../firebase';
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center, Spinner, useToast } from '@chakra-ui/react';
 
 const ItemDetailContainer = () => {
+  const toast = useToast();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const { itemId } = useParams();
@@ -17,7 +18,13 @@ const ItemDetailContainer = () => {
       .get()
       .then(payload => {
         if (!payload) {
-          console.warn('Items not found');
+          toast({
+            title: 'Error',
+            description: 'No hay productos disponibles',
+            status: 'error',
+            duration: 5000,
+            isClosable: true
+          });
         } else {
           const querySnapshot = payload.docs.map(e => {
             return { ...e.data(), id: e.id };
