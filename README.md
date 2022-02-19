@@ -5,6 +5,11 @@
 <strong>Launchpad</strong> es un <strong>e-commerce</strong> inspirado en <a href="https://bigbox.com.ar">BigBox</a> construido sobre <a href="https://reactjs.org/">ReactJs</a>.
 </p>
 
+<img style="width: 100%;" src="https://user-images.githubusercontent.com/71844573/154787370-01119eab-caeb-4b7b-8052-8ea7cad8d022.gif">
+
+![Grabación_de_pantalla_2022-02-19_a_la_s__01_51_02_AdobeCreativeCloudExpress](https://user-images.githubusercontent.com/71844573/154787370-01119eab-caeb-4b7b-8052-8ea7cad8d022.gif)
+
+
 ## ⚡️ Inicio rápido
 
 ```bash
@@ -22,26 +27,23 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Levanta la aplicación en modo desarrollo.\
+Abrir [http://localhost:3000](http://localhost:3000) para verlo en el navegador.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+La página se actualizará en cuanto edites el documento.\
+Podrías ver cualquier error en consola.
 
 ### `yarn build`
 
+Arma la aplicación en la carpeta `build`.\
+
 Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Agrupa correctamente React en modo de producción y optimiza la compilación para obtener el mejor rendimiento.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La compilación está minificada y los nombres de los archivos incluyen los hashes.\
+Tu aplicación está lista para ser desplegada.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Consulte la sección sobre [despliegue](https://facebook.github.io/create-react-app/docs/deployment) para obtener más información.
 
 ## 🎯 Características
 
