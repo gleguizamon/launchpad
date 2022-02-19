@@ -18,7 +18,9 @@ const Item = ({ product }) => (
           {product.name}
         </Box>
         <Box className="f4" as="span">
-          {product.stock ? `$${product.price.toFixed(2)}` : '-'}
+          {product.stock
+            ? `$${product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`
+            : '-'}
         </Box>
         <Box>
           {product.stock ? (
