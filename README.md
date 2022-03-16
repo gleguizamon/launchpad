@@ -22,7 +22,7 @@ yarn start
 
 Asegúrese de tener instalado Yarn ([descargar](https://yarnpkg.com/)).
 
-## Scripts
+## ✅ Scripts
 
 Una vez en el directorio del proyecto, puedes correr:
 
