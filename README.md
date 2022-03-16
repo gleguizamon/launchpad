@@ -5,7 +5,11 @@
 <strong>Launchpad</strong> es un <strong>e-commerce</strong> inspirado en <a href="https://bigbox.com.ar">BigBox</a> construido sobre <a href="https://reactjs.org/">ReactJs</a>.
 </p>
 
-![Grabación_de_pantalla_2022-02-19_a_la_s__01_51_02_AdobeCreativeCloudExpress (1)](https://user-images.githubusercontent.com/71844573/154787723-93516cf3-89b4-4d99-9be2-d7c92df5a0ce.gif)
+<div align="center">
+  
+  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/71844573/158618720-6e9ca88d-4688-4376-abb9-abf54b10e1ab.gif)
+  
+</div>
 
 ## ⚡️ Inicio rápido
 
