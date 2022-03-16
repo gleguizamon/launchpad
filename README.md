@@ -24,7 +24,7 @@ Asegúrese de tener instalado Yarn ([descargar](https://yarnpkg.com/)).
 
 ## Available Scripts
 
-In the project directory, you can run:
+Una vez en el directorio del proyecto, puedes correr:
 
 ### `yarn start`
 
