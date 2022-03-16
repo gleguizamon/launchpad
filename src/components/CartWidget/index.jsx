@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { useCartContext } from '../../context/CartContext';
+import { Link } from 'react-router-dom';
 import { BiCart } from 'react-icons/bi';
 import {
   Button,
@@ -10,14 +12,10 @@ import {
   PopoverCloseButton,
   PopoverBody
 } from '@chakra-ui/react';
-import { useCartContext } from '../../context/CartContext';
-import { Link } from 'react-router-dom';
 
 const CartWidget = () => {
   const { totalQuantity, cart } = useCartContext();
   if (cart.length === 0) return null;
-  const initRef = useRef();
-  console.warn(cart.map(item => item.quantity * item.price).reduce((a, b) => a + b, 0));
 
   const totalPreviewPrice = cart
     .map(item => item.quantity * item.price)
@@ -26,7 +24,7 @@ const CartWidget = () => {
     .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   return (
     <>
-      <Popover closeOnBlur={true} placement="bottom" initialFocusRef={initRef}>
+      <Popover closeOnBlur={true} placement="bottom">
         {({ onClose }) => (
           <>
             <PopoverTrigger>
@@ -46,7 +44,7 @@ const CartWidget = () => {
                   Cantidad de items: {totalQuantity} {`($${totalPreviewPrice})`}
                 </span>
                 <Link to="/cart">
-                  <Button size="sm" colorScheme="blue" onClick={onClose} ref={initRef}>
+                  <Button size="sm" colorScheme="blue" onClick={onClose}>
                     Ver
                   </Button>
                 </Link>

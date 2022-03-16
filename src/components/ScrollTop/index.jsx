@@ -21,13 +21,14 @@ const ScrollTop = () => {
   return (
     <>
       <FaArrowCircleUp
-        className="w-100 fixed items-center justify-center pointer scrollTop primary"
+        className="fixed f1 items-center justify-center pointer scrollTop primary"
         onClick={scrollTop}
         style={{ height: 40, display: showScroll ? 'flex' : 'none' }}
       />
       <style jsx>{`
         .scrollTop {
-          bottom: 20px;
+          bottom: 30px;
+          right: 30px;
           height: 20px;
           z-index: 1000;
           animation: fadeIn 0.5s;
@@ -35,7 +36,7 @@ const ScrollTop = () => {
         }
 
         .scrollTop:hover {
-          opacity: 1;
+          opacity: 0.7;
         }
 
         @keyframes fadeIn {

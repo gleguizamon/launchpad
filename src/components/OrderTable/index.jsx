@@ -4,7 +4,7 @@ import { BiTrashAlt } from 'react-icons/bi';
 import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
-const ItemsTable = ({ items, withRemoveItem }) => {
+const OrderTable = ({ items, withRemoveItem }) => {
   const { removeItem } = useCartContext();
 
   return (
@@ -61,4 +61,4 @@ const ItemsTable = ({ items, withRemoveItem }) => {
   );
 };
 
-export default ItemsTable;
+export default OrderTable;

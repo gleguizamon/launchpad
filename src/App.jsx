@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ItemListContainer from './containers/ItemListContainer';
 import ItemDetailContainer from './containers/ItemDetailContainer';
 import ScrollTop from './components/ScrollTop';
@@ -22,6 +23,7 @@ const App = () => (
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <ScrollTop />
+      <Footer />
     </BrowserRouter>
   </CartContext>
 );

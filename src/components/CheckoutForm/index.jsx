@@ -82,7 +82,6 @@ const CheckoutForm = ({ items, hasStock, itemsWithOverstock }) => {
         isClosable: true
       });
       clearCart();
-      console.warn('id', response.id);
       navigate('/order/' + response.id);
     }
   };

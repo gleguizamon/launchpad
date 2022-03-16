@@ -1,14 +1,13 @@
 {
   "javascript.validate.enable": false,
-  "typescript.validate.enable": false,
   "search.exclude": {
     "**/node_modules": true,
     "**/build": true,
+    "**/dist": true,
     "**/yarn.lock": true,
   },
   "editor.formatOnSave": true,
   "javascript.format.enable": false,
   "workbench.editor.enablePreview": true,
-  "workbench.editor.enablePreviewFromQuickOpen": true,
-  "typescript.disableAutomaticTypeAcquisition": true
+  "workbench.editor.enablePreviewFromQuickOpen": true
 }

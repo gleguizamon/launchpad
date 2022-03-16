@@ -32,7 +32,27 @@ const ItemListContainer = () => {
           const data = categoryId
             ? querySnapshot.filter(product => product.category === categoryId)
             : querySnapshot;
-          setItems(data);
+          setItems(
+            data.filter(
+              product =>
+                product.name &&
+                typeof product.name === 'string' &&
+                product.category &&
+                typeof product.category === 'string' &&
+                product.description &&
+                typeof product.description === 'string' &&
+                product.id &&
+                typeof product.id === 'string' &&
+                product.image &&
+                typeof product.image === 'string' &&
+                product.name &&
+                typeof product.name === 'string' &&
+                product.price &&
+                typeof product.price === 'number' &&
+                (product.stock !== null || product.stock !== undefined) &&
+                typeof product.stock === 'number'
+            )
+          );
         }
       })
       .catch(err => console.warn(err))
